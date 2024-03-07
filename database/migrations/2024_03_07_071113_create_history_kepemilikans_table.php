@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('badan_penyelenggaras', function (Blueprint $table) {
+        Schema::create('history_kepemilikans', function (Blueprint $table) {
             $table->id();
-            $table->string('bp_nama',45)->nullable(false);
-            $table->longText('bp_alamat');
-            $table->enum('bp_status', ['Aktif','Tidak Aktif','not set'])->default('not set');
+            $table->date('tgl_hk_perubahan');
+            $table->longText('keterangan_hk');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('badan_penyelenggaras');
+        Schema::dropIfExists('history_kepemilikans');
     }
 };
