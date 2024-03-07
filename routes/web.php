@@ -20,3 +20,17 @@ Route::get('/', function () {
 Route::get('/input', function () {
     return view('form.form-input');
 });
+
+Route::get('/auth', function () {
+    return view('auth');
+});
+
+Route::get('/pt', function () {
+    return view('form.form-input-pt');
+});
+
+Route::get('/ppt', function () {
+    return view('form.form-input-pt');
+});
+
+
