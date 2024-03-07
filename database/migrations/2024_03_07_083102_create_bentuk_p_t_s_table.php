@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('badan_penyelenggaras', function (Blueprint $table) {
+        Schema::create('bentuk_p_t_s', function (Blueprint $table) {
             $table->id();
-            $table->string('bp_nama',45)->nullable(false);
-            $table->longText('bp_alamat');
-            $table->enum('bp_status', ['Aktif','Tidak Aktif','not set'])->default('not set');
+            $table->string('bentuk_nama',100);
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('badan_penyelenggaras');
+        Schema::dropIfExists('bentuk_p_t_s');
     }
 };

@@ -70,6 +70,80 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
         });
+
+        Schema::table('pimpinan_pertis', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_perti');
+            $table->foreign('id_perti')->references('id')->on('perguruan_tinggis');
+
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+        });
+
+        Schema::table('history_perkaras', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_perti');
+            $table->foreign('id_perti')->references('id')->on('perguruan_tinggis');
+
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+        });
+
+        Schema::table('history_kepemilikans', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_perti');
+            $table->foreign('id_perti')->references('id')->on('perguruan_tinggis');
+
+            $table->unsignedBigInteger('bp_lama');
+            $table->foreign('bp_lama')->references('id')->on('badan_penyelenggaras');
+
+            $table->unsignedBigInteger('bp_baru');
+            $table->foreign('bp_baru')->references('id')->on('badan_penyelenggaras');
+
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+        });
+
+        Schema::table('kumhams', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_akta');
+            $table->foreign('id_akta')->references('id')->on('aktas');
+
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+        });
+
+        Schema::table('aktas', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_bp');
+            $table->foreign('id_bp')->references('id')->on('badan_penyelenggaras');
+
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+        });
+        Schema::table('penguruses', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_akta');
+            $table->foreign('id_akta')->references('id')->on('aktas');
+
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+        });
+        Schema::table('history_perkara_b_p_s', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_bp');
+            $table->foreign('id_bp')->references('id')->on('badan_penyelenggaras');
+
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+        });
+        Schema::table('history_perubahan_bentuks', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_bentuk_sebelumnya');
+            $table->foreign('id_bentuk_sebelumnya')->references('id')->on('bentuk_p_t_s');
+
+            $table->unsignedBigInteger('id_bentuk_baru');
+            $table->foreign('id_bentuk_baru')->references('id')->on('bentuk_p_t_s');
+
+            $table->unsignedBigInteger('id_akreditasi_prodi');
+            $table->foreign('id_akreditasi_prodi')->references('id')->on('akreditasi_prodis');
+
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+
+        });
     
     }
 
@@ -132,6 +206,82 @@ return new class extends Migration
 
             $table->dropForeign(['id_perti']); 
             $table->dropColumn('id_perti'); 
+
+            $table->dropForeign(['id_user']); 
+            $table->dropColumn('id_user'); 
+        });
+        
+        Schema::table('pimpinan_pertis', function (Blueprint $table) {
+            $table->dropForeign(['id_perti']); 
+            $table->dropColumn('id_perti');
+            
+            $table->dropForeign(['id_user']); 
+            $table->dropColumn('id_user'); 
+        });
+
+        Schema::table('history_perkaras', function (Blueprint $table) {
+            $table->dropForeign(['id_perti']); 
+            $table->dropColumn('id_perti');
+            
+            $table->dropForeign(['id_user']); 
+            $table->dropColumn('id_user'); 
+        });
+
+        Schema::table('history_kepemilikans', function (Blueprint $table) {
+            $table->dropForeign(['id_perti']); 
+            $table->dropColumn('id_perti');
+
+            $table->dropForeign(['bp_lama']); 
+            $table->dropColumn('bp_lama');
+
+            $table->dropForeign(['bp_baru']); 
+            $table->dropColumn('bp_baru');
+            
+            $table->dropForeign(['id_user']); 
+            $table->dropColumn('id_user'); 
+        });
+
+        Schema::table('kumhams', function (Blueprint $table) {
+            $table->dropForeign(['id_akta']); 
+            $table->dropColumn('id_akta');
+            
+            $table->dropForeign(['id_user']); 
+            $table->dropColumn('id_user'); 
+        });
+
+        Schema::table('aktas', function (Blueprint $table) {
+            $table->dropForeign(['id_bp']); 
+            $table->dropColumn('id_bp');
+            
+            $table->dropForeign(['id_user']); 
+            $table->dropColumn('id_user'); 
+        });
+
+        Schema::table('penguruses', function (Blueprint $table) {
+            $table->dropForeign(['id_akta']); 
+            $table->dropColumn('id_akta');
+            
+            $table->dropForeign(['id_user']); 
+            $table->dropColumn('id_user'); 
+        });
+
+        Schema::table('history_perkara_b_p_s', function (Blueprint $table) {
+            $table->dropForeign(['id_bp']); 
+            $table->dropColumn('id_bp');
+            
+            $table->dropForeign(['id_user']); 
+            $table->dropColumn('id_user'); 
+        });
+
+        Schema::table('history_perubahan_bentuks', function (Blueprint $table) {
+            $table->dropForeign(['id_bentuk_sebelumnya']); 
+            $table->dropColumn('id_bentuk_sebelumnya');
+            
+            $table->dropForeign(['id_bentuk_baru']); 
+            $table->dropColumn('id_bentuk_baru'); 
+
+            $table->dropForeign(['id_akreditasi_prodi']); 
+            $table->dropColumn('id_akreditasi_prodi'); 
 
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
