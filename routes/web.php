@@ -25,3 +25,17 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::group(['middleware' => ['auth']], function() {
 
 });
+
+Route::get('/auth', function () {
+    return view('auth');
+});
+
+Route::get('/pt', function () {
+    return view('form.form-input-pt');
+});
+
+Route::get('/ppt', function () {
+    return view('form.form-input-pt');
+});
+
+
