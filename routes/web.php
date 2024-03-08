@@ -20,3 +20,11 @@ Route::get('/', function () {
 Route::get('/input', function () {
     return view('form.form-input');
 });
+
+Route::get('/auth', function () {
+    return view('form.auth');
+}); 
+
+Route::get('/log', function () {
+    return view('layouts.log');
+}); 

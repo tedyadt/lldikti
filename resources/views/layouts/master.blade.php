@@ -26,6 +26,7 @@
  
     
     @yield('page-css')
+    @vite([])
 </head>
 
 <body class="text-left">

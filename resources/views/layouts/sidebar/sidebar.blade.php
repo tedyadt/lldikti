@@ -12,16 +12,7 @@
             <ul class="metismenu" id="menu">
                 <!-- Dashboard -->
                 <li class="Ul_li--hover"><a href="/"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Dashboard</span></a>
-                                <!-- <ul class="mm-collapse">
-                                    <li class="item-name"><a href="dashboard1.html"><i class="i-Circular-Point mr-2 text-muted"></i><span class="text-muted">Version 1</span></a></li>
-                                    <li class="item-name"><a href="dashboard2.html"><i class="i-Circular-Point mr-2 text-muted"></i><span class="text-muted">Version 2 </span></a></li>
-                                    <li class="item-name"><a href="dashboard3.html"><i class="i-Circular-Point mr-2 text-muted"></i><span class="text-muted">Version 3</span></a></li>
-                                    <li class="item-name"><a href="dashboard4.html"><i class="i-Circular-Point mr-2 text-muted"></i><span class="text-muted">Version 4</span></a></li>
-                                </ul> -->
-                            </li>
-                
-                
-                
+                 </li>
                             
                             <!-- Forms -->
                             <li class="Ul_li--hover"><a class="has-arrow" href="#"><i class="i-File-Clipboard-File--Text text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Input Data</span></a>
@@ -34,20 +25,15 @@
                                     <li class="item-name"><a href="form.input.group.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Input Pimpinan PT</span></a></li>
                                     <li class="item-name"><a href="form.input.group.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Input Perguruan Tinggi</span></a></li>
                                     
-                                    <li class="item-name"><a href="tag.input.html"><i class="nav-icon i-Tag-2"></i><span class="item-name">Tag Input</span></a></li>
-                                    <li class="item-name"><a href="editor.html"><i class="nav-icon i-Pen-2"></i><span class="item-name">Rich Editor</span></a></li>
                                 </ul>
                             </li>
-
+                        <!-- Data -->
                             <li class="Ul_li--hover"><a class="has-arrow"><i class=" i-File-Horizontal-Text text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted"></i><span class="item-name text-15 text-muted">Data</span></a>
                             
                                 <ul class="mm-collapse">
-                                <li class="item-name"><a href="widget-card.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">widget card</span></a></li>
-                                    <li class="item-name"><a href="widget-statistics.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Pimpinan PT</span></a></li>
-                                    <li class="item-name"><a href="widget-list.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Widget List</span></a></li>
-                                    <li class="item-name"><a href="../sessions/signin.html"><i class="nav-icon i-Checked-User"></i><span class="item-name">Sign in</span></a></li>
-                                    <li class="item-name"><a href="../sessions/signup.html"><i class="nav-icon i-Add-User"></i><span class="item-name">Sign up</span></a></li>
-                                    <li class="item-name"><a href="../sessions/forgot.html"><i class="nav-icon i-Find-User"></i><span class="item-name">Forgot</span></a></li>
+                                <li class="item-name"><a href="widget-card.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Pimpinan PT</span></a></li>
+                                    <li class="item-name"><a href="widget-statistics.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Perguruan TInggi</span></a></li>
+                                    <li class="item-name"><a href="widget-list.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Badan Penyelenggara</span></a></li>
                                 </ul>
                             </li>
 
@@ -67,7 +53,7 @@
                                     <li class="item-name"><a class="open" href="blank.html"><i class="nav-icon i-File-Horizontal"></i><span class="item-name">Blank Page</span></a></li>
                                 </ul>
                             </li>
-                            <li class="Ul_li--hover"><a href="http://demos.ui-lib.com/gull-html-doc/"><i class="i-Safe-Box1 text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Doc</span></a></li>
+                            <li class="Ul_li--hover"><a href="/log"><i class="i-Safe-Box1 text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Log</span></a></li>
                         </ul>
                     </div>
                 </div>
