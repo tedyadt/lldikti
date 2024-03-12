@@ -74,7 +74,16 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $permissions = Permission::select([
+            'id',
+            'name'
+        ])->orderBy('id', 'asc')->get();
+
+        // $role_has_permission
+        return view('user_manajemen.role.edit', [
+            'permissions' => $permissions,
+            'role' => $role
+        ]);
     }
 
     /**
@@ -82,7 +91,22 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        //
+        try{
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'permissions' => 'required|array|min:1',
+                'permissions' => 'exists:permissions,name', // Pastikan semua nilai dalam array ada di tabel permissions
+            ]);
+    
+            $role->update([
+                'name' => $request->name
+            ]);
+    
+            $role->syncPermissions($request->permissions);
+        }catch(\Exception $e){
+            dd($e->getMessage());
+        }
+
     }
 
     /**

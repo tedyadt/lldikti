@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -21,7 +23,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::select([
+            'id',
+            'name'
+        ])->get();
+        return view('user_manajemen.user.create', [
+            'roles' => $roles
+        ]);
     }
 
     /**
@@ -29,7 +37,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        try{
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users,email',
+                'nip' => 'required|string|unique:users,nip',
+                'password' => 'required|string|min:8|confirmed',
+                'is_active' => 'required|in:1,0',
+                'role' => 'required|string|exists:roles,name'
+            ]);
+
+            $validatedData['password'] = Hash::make($validatedData['password']);
+
+            $user = User::create($validatedData);
+    
+            $user->assignRole($request->role);
+
+            dd('sukses');
+
+        }catch(\Exception $e){
+            dd($e->getMessage());
+        }
     }
 
     /**
