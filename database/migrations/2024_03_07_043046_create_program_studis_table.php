@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('program_studis', function (Blueprint $table) {
             $table->id();
-            $table->string('program_studi_nama', 70)->nullable(false);
-            $table->string('program_studi_jenjag', 5)->nullable(false);
-            $table->string('program_studi_sk_penyelenggara', 200)->nullable(false);
-            $table->enum('program_studi_tgl_sk_date', ['Aktif','Pembinaan','Alih Bentuk','Alih Kelola','Tutup', 'not set'])->default('not set');
+            $table->string('program_studi_nama', 70)->nullable(false)->default('not set');
+            $table->string('program_studi_jenjang', 10)->nullable(false)->default('not set');
+            $table->string('program_studi_sk_penyelenggara', 200)->nullable(false)->default('not set');
+            $table->date('program_studi_tgl_sk')->nullable(false)->default('1000-01-01');
+            $table->date('program_studi_tgl_tutup')->nullable(false)->default('1000-01-01');
+            $table->enum('program_studi_status', ['Aktif','Pembinaan','Alih Bentuk','Alih Kelola','Tutup', 'not set'])->default('not set');
             $table->timestamps();
         });
     }

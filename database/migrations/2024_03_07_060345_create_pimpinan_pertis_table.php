@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('pimpinan_pertis', function (Blueprint $table) {
             $table->id();
+            $table->string('pimpinan_nama',100)->nullable(false)->default('not set');
+            $table->string('pimpinan_telp',45)->nullable(false)->default('not set');
+            $table->string('pimpinan_email',100)->nullable(false)->default('not set');
+            $table->date('pimpinan_tgl_awal')->nullable(false)->default('1000-01-01');
+            $table->date('pimpinan_tgl_akhir')->nullable(false)->default('1000-01-01');
+            $table->string('pimpinan_sk',45)->nullable(false)->default('not set');
+            $table->enum('pimpinan_status', ['Aktif','Tidak Aktif','not set'])->default('not set');
+            $table->longText('pimpinan_foto')->nullable()->default('not set');
             $table->timestamps();
         });
     }

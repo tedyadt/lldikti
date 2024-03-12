@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('role_permissions', function (Blueprint $table) {
+        Schema::create('history_perubahan_bentuks', function (Blueprint $table) {
             $table->id();
+            $table->date('hpb_tgl_perubahan')->nullable(false)->default('1000-01-01');
+            $table->date('hpb_tgl_awal_bentuk_lama')->nullable(false)->default('1000-01-01');
+            $table->date('hpb_tgl_akhiri_bentuk_lama')->nullable(false)->default('1000-01-01');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('role_permissions');
+        Schema::dropIfExists('history_perubahan_bentuks');
     }
 };

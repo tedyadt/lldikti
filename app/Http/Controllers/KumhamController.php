@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RolePermission;
-use App\Http\Requests\StoreRolePermissionRequest;
-use App\Http\Requests\UpdateRolePermissionRequest;
+use App\Models\Kumham;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class RolePermissionController extends Controller
+class KumhamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class RolePermissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRolePermissionRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class RolePermissionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(RolePermission $rolePermission)
+    public function show(Kumham $kumham)
     {
         //
     }
@@ -43,7 +43,7 @@ class RolePermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RolePermission $rolePermission)
+    public function edit(Kumham $kumham)
     {
         //
     }
@@ -51,7 +51,7 @@ class RolePermissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRolePermissionRequest $request, RolePermission $rolePermission)
+    public function update(Request $request, Kumham $kumham)
     {
         //
     }
@@ -59,7 +59,7 @@ class RolePermissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RolePermission $rolePermission)
+    public function destroy(Kumham $kumham)
     {
         //
     }

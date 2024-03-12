@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('bentuk_p_t_s', function (Blueprint $table) {
             $table->id();
-            $table->string('permission', 45)->nullable(false);
-            $table->string('permission_guard_name', 30)->default('web');
+            $table->string('bentuk_perti_nama',100)->nullable(false)->default('not set');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('bentuk_p_t_s');
     }
 };
