@@ -14,7 +14,7 @@ class PeringkatAkreditasiController extends Controller
      */
     public function index()
     {
-        //
+        return  view('master.peringkat_akreditasi.index');
     }
 
     /**
@@ -22,7 +22,7 @@ class PeringkatAkreditasiController extends Controller
      */
     public function create()
     {
-        //
+        return  view('master.peringkat_akreditasi.create');
     }
 
     /**
@@ -30,7 +30,25 @@ class PeringkatAkreditasiController extends Controller
      */
     public function store(StorePeringkatAkreditasiRequest $request)
     {
-        //
+        // dd($request);
+
+        try {
+            $validatedData = $request->validate([
+                'peringkat_nama' => 'required|string',
+                'peringkat_logo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            ]);
+            if ($request->hasFile('peringkat_logo')) {
+                $filenameWithExt = $request->file('peringkat_logo')->getClientOriginalName(); $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('peringkat_logo')->getClientOriginalExtension(); $filenameSimpan = $filename.'_'.time().'.'.$extension;
+                $path = $request->file('peringkat_logo')->storeAs('public/peringkat_akreditasi', $filenameSimpan);
+                $validatedData['peringkat_logo'] = $filenameSimpan;
+            }
+            PeringkatAkreditasi::create($validatedData);
+            dd('Success');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
     }
 
     /**
@@ -77,6 +95,16 @@ class PeringkatAkreditasiController extends Controller
         }
     
         return Datatables::of($peringkatAkreditasiById)->make(true);
+    }
+
+    public function peringkatakreditasijson(){
+        $peringkatAkreditasi = PeringkatAkreditasi::select([
+            'id',
+            'peringkat_nama',
+            'peringkat_logo',
+        ]);
+    
+        return Datatables::of($peringkatAkreditasi)->make(true);
     }
 
 }

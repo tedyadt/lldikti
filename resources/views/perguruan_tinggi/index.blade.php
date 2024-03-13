@@ -132,7 +132,8 @@
     <script>
         $(document).ready(function() {
             $('#add-new-bp').click(function() {
-                window.location.href = '{{ route("perguruan-tinggi.create") }}';            });
+                window.location.href = '{{ route("perguruan-tinggi.create") }}';            
+            });
         });
     </script>
 

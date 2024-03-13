@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('bentuk_p_t_s', function (Blueprint $table) {
             $table->id();
             $table->string('bentuk_perti_nama',100)->nullable(false)->default('not set');
-            $table->string('bentuk_nama',100);
             $table->timestamps();
         });
     }
