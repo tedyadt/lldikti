@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('badan_penyelenggaras', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
             $table->string('bp_nama',45)->nullable(false)->default('not set');
             $table->string('bp_kontak', 200)->nullable(false)->default('not set');
             $table->string('bp_alamat')->nullable(false)->default('not set');
             $table->string('bp_logo')->nullable(false)->default('not set');
-=======
             $table->string('bp_nama',45)->nullable(false);
             $table->longText('bp_alamat');
->>>>>>> main
             $table->enum('bp_status', ['Aktif','Tidak Aktif','not set'])->default('not set');
             $table->timestamps();
         });

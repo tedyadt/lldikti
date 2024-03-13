@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('pimpinan_pertis', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
             $table->string('pimpinan_nama',100)->nullable(false)->default('not set');
             $table->string('pimpinan_telp',45)->nullable(false)->default('not set');
             $table->string('pimpinan_email',100)->nullable(false)->default('not set');
@@ -22,7 +21,6 @@ return new class extends Migration
             $table->string('pimpinan_sk',45)->nullable(false)->default('not set');
             $table->enum('pimpinan_status', ['Aktif','Tidak Aktif','not set'])->default('not set');
             $table->longText('pimpinan_foto')->nullable()->default('not set');
-=======
             $table->string('nama_pimpinan',100)->nullable(false);
             $table->string('telp_pimpinan',45);
             $table->string('email_pimpinan',100);
@@ -32,7 +30,6 @@ return new class extends Migration
             $table->string('sk_pimpinan',45);
             $table->enum('status_pimpinan', ['Aktif','Tidak Aktif','not set'])->default('not set');
             $table->longText('foto_pimpinan');
->>>>>>> main
             $table->timestamps();
         });
     }

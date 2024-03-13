@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('history_perkara_b_p_s', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
+
             $table->date('hpbp_tgl_kejadian')->nullable(false)->default('1000-01-01');
             $table->longText('hpbp_deskripsi')->nullable(false)->default('not set');
             $table->longText('hpbp_solusi')->nullable(false)->default('not set');
-=======
             $table->date('hpbp_tgl_kejadian');
             $table->longText('hpbp_deskripsi');
             $table->longText('hpbp_solusi');
->>>>>>> main
             $table->enum('status', ['Aktif','Tidak Aktif','not set'])->default('not set');
             $table->timestamps();
         });
