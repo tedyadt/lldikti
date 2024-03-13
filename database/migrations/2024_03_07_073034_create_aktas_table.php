@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('aktas', function (Blueprint $table) {
             $table->id();
+            $table->string('akta_nomor',45)->nullable(false)->default('not set');
+            $table->date('akta_tgl')->nullable(false)->default('1000-01-01');
+            $table->string('akta_nama_notaris',150)->nullable(false)->default('not set');
+            $table->string('akta_kota_notaris',150)->nullable(false)->default('not set');
+            $table->enum('akta_status', ['Aktif','Tidak Aktif','not set'])->default('not set');
+            $table->enum('akta_jenis', ['Aktif','Tidak Aktif','not set'])->default('not set');
+            $table->string('akta_dokumen', 100)->nullable(false)->default('not set');
             $table->string('nomor_akta',6)->nullable(false);
             $table->date('tgl_akta');
             $table->string('nama_akta',150);

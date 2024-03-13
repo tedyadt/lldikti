@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
+use App\Models\Permission;
+use Yajra\Datatables\Datatables;
+use Spatie\Permission\Models\Role;
+
 
 class RoleController extends Controller
 {
@@ -13,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return  view('user_manajemen.role.index');
     }
 
     /**
@@ -21,7 +24,15 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $permissions = Permission::select([
+            'id',
+            'name'
+        ])->orderBy('id', 'asc')->get();
+
+        return view('user_manajemen.role.create', [
+            'permissions' => $permissions
+        ]);
+
     }
 
     /**
@@ -29,7 +40,25 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        //
+        try{
+            // dd($request);
+            $validatedData = $request->validate([
+                'name' => 'required|string',
+                'permissions' => 'required|array|min:1', // Setidaknya satu elemen dalam array diperlukan
+                'permissions' => 'exists:permissions,name', // Pastikan semua nilai dalam array ada di tabel permissions
+            ]);
+
+            $role = Role::create([
+                'name' => $request->name,
+                'guard_name' => 'web'
+            ]);
+
+            $role->givePermissionTo($request->permissions);
+
+        }catch(\Exception $e){
+            dd($e->getMessage());
+        }
+
     }
 
     /**
@@ -45,7 +74,16 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $permissions = Permission::select([
+            'id',
+            'name'
+        ])->orderBy('id', 'asc')->get();
+
+        // $role_has_permission
+        return view('user_manajemen.role.edit', [
+            'permissions' => $permissions,
+            'role' => $role
+        ]);
     }
 
     /**
@@ -53,7 +91,22 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        //
+        try{
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'permissions' => 'required|array|min:1',
+                'permissions' => 'exists:permissions,name', // Pastikan semua nilai dalam array ada di tabel permissions
+            ]);
+    
+            $role->update([
+                'name' => $request->name
+            ]);
+    
+            $role->syncPermissions($request->permissions);
+        }catch(\Exception $e){
+            dd($e->getMessage());
+        }
+
     }
 
     /**
@@ -63,4 +116,19 @@ class RoleController extends Controller
     {
         //
     }
+
+    // public function rolejson(){
+    //     $roles = Role::select('roles.id as id', 'roles.name as role_name', 'permissions.name as permission_name', 'role_has_permissions.*')
+    //     ->join('role_has_permissions', 'roles.id', '=', 'role_has_permissions.role_id')
+    //     ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+    //     ->get();
+
+    //     return Datatables::of($roles)->make(true);
+    // }
+    public function rolejson(){
+        $roles = Role::select('roles.id as id', 'roles.name as role_name');
+
+        return Datatables::of($roles)->make(true);
+    }
+
 }

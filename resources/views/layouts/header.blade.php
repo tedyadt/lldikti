@@ -16,6 +16,9 @@
                 <div class="menu-icon-grid"><a href="#"><i class="i-Shop-4"></i> Home</a><a href="#"><i class="i-Library"></i> UI Kits</a><a href="#"><i class="i-Drop"></i> Apps</a><a href="#"><i class="i-File-Clipboard-File--Text"></i> Forms</a><a href="#"><i class="i-Checked-User"></i> Sessions</a><a href="#"><i class="i-Ambulance"></i> Support</a></div>
             </div>
         </div>
-        
+
+        <a href="{{ route('logout') }}" data-toggle="tooltip" data-placement="bottom" title="Logout">
+            <i class="  header-icon d-none d-sm-inline-block bi bi-box-arrow-right" ></i>
+        </a>
     </div>
 </header>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PeringkatAkreditasi;
 use App\Http\Requests\StorePeringkatAkreditasiRequest;
 use App\Http\Requests\UpdatePeringkatAkreditasiRequest;
+use Yajra\Datatables\Datatables;
 
 class PeringkatAkreditasiController extends Controller
 {
@@ -63,4 +64,19 @@ class PeringkatAkreditasiController extends Controller
     {
         //
     }
+
+    public function getperingkatakreditasibyidjson($id){
+        $peringkatAkreditasiById = PeringkatAkreditasi::select([
+            'id',
+            'peringkat_nama',
+            'peringkat_logo',
+        ])->where('id', '=', $id)->get(); // Menggunakan get() untuk mengambil hasil dari kueri
+    
+        if ($peringkatAkreditasiById->isEmpty()) {
+            return response()->json([]); // Mengembalikan array kosong jika tidak ada data
+        }
+    
+        return Datatables::of($peringkatAkreditasiById)->make(true);
+    }
+
 }

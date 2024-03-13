@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PimpinanPerti;
 use App\Http\Requests\StorePimpinanPertiRequest;
 use App\Http\Requests\UpdatePimpinanPertiRequest;
+use Yajra\Datatables\Datatables;
 
 class PimpinanPertiController extends Controller
 {

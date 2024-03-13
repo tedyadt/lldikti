@@ -7,70 +7,32 @@
 
     <!--  user -->
     <div class="scroll-nav ps ps--active-y" data-perfect-scrollbar="data-perfect-scrollbar" data-suppress-scroll-x="true">
-    <div class="side-nav">
-        <div class="main-menu">
-            <ul class="metismenu" id="menu">
-                <!-- Dashboard -->
-                <li class="Ul_li--hover"><a href="/"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Dashboard</span></a>
-                                <!-- <ul class="mm-collapse">
-                                    <li class="item-name"><a href="dashboard1.html"><i class="i-Circular-Point mr-2 text-muted"></i><span class="text-muted">Version 1</span></a></li>
-                                    <li class="item-name"><a href="dashboard2.html"><i class="i-Circular-Point mr-2 text-muted"></i><span class="text-muted">Version 2 </span></a></li>
-                                    <li class="item-name"><a href="dashboard3.html"><i class="i-Circular-Point mr-2 text-muted"></i><span class="text-muted">Version 3</span></a></li>
-                                    <li class="item-name"><a href="dashboard4.html"><i class="i-Circular-Point mr-2 text-muted"></i><span class="text-muted">Version 4</span></a></li>
-                                </ul> -->
-                            </li>
-                
-                
-                
-                            
-                            <!-- Forms -->
-                            <li class="Ul_li--hover"><a class="has-arrow" href="#"><i class="i-File-Clipboard-File--Text text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Input Data</span></a>
-                                <ul class="mm-collapse">
-                                    <!-- <li class="item-name"><a href="form.basic.html"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">Basic Elements</span></a></li>
-                                    <li class="item-name"><a href="basic-action-bar.html"><i class="nav-icon i-File-Clipboard-Text--Image"></i><span class="item-name">Basic action bar </span></a></li>
-                                    <li class="item-name"><a href="form.layouts.html"><i class="nav-icon i-Split-Vertical"></i><span class="item-name">Form Layouts</span></a></li>
-                                    <li class="item-name"><a href="multi-column-forms.html"><i class="nav-icon i-Split-Vertical"></i><span class="item-name">Multi column forms</span></a></li> -->
-                                    <li class="item-name"><a href="/input"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Input Badan Penyelenggara</span></a></li>
-                                    <li class="item-name"><a href="form.input.group.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Input Pimpinan PT</span></a></li>
-                                    <li class="item-name"><a href="form.input.group.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Input Perguruan Tinggi</span></a></li>
-                                    
-                                    <li class="item-name"><a href="tag.input.html"><i class="nav-icon i-Tag-2"></i><span class="item-name">Tag Input</span></a></li>
-                                    <li class="item-name"><a href="editor.html"><i class="nav-icon i-Pen-2"></i><span class="item-name">Rich Editor</span></a></li>
-                                </ul>
-                            </li>
+        <div class="side-nav">
+            <div class="main-menu">
+                <ul class="metismenu" id="menu">
+                    <!-- Dashboard -->
+                    <li class="Ul_li--hover">
+                        <a href="/dashboard"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Dashboard</span></a>
+                    </li>
 
-                            <li class="Ul_li--hover"><a class="has-arrow"><i class=" i-File-Horizontal-Text text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted"></i><span class="item-name text-15 text-muted">Data</span></a>
-                            
-                                <ul class="mm-collapse">
-                                <li class="item-name"><a href="widget-card.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">widget card</span></a></li>
-                                    <li class="item-name"><a href="widget-statistics.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Pimpinan PT</span></a></li>
-                                    <li class="item-name"><a href="widget-list.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Widget List</span></a></li>
-                                    <li class="item-name"><a href="../sessions/signin.html"><i class="nav-icon i-Checked-User"></i><span class="item-name">Sign in</span></a></li>
-                                    <li class="item-name"><a href="../sessions/signup.html"><i class="nav-icon i-Add-User"></i><span class="item-name">Sign up</span></a></li>
-                                    <li class="item-name"><a href="../sessions/forgot.html"><i class="nav-icon i-Find-User"></i><span class="item-name">Forgot</span></a></li>
-                                </ul>
-                            </li>
+                    <li class="Ul_li--hover">
+                        <a href="/badan-penyelenggara"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Badan Penyelenggara</span></a>
+                    </li>
 
-                            <li class="Ul_li--hover"><a class="has-arrow" href="#"><i class="i-Computer-Secure text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">History</span></a>
-                                <ul class="mm-collapse">
-                                    <li class="item-name"><a href="widget-card.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">widget card</span></a></li>
-                                    <li class="item-name"><a href="widget-statistics.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">widget statistics</span></a></li>
-                                    <li class="item-name"><a href="widget-list.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Widget List</span></a></li>
-                                    <li class="item-name"><a href="widget-app.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Widget App </span></a></li>
-                                    <li class="item-name"><a href="weather-card.html"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Weather App </span></a></li>
-                                </ul>
-                            </li>
-                            <li class="Ul_li--hover"><a class="has-arrow"><i class="i-Double-Tap text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Others</span></a>
-                                <ul class="mm-collapse">
-                                    <li class="item-name"><a href="../sessions/not-found.html"><i class="nav-icon i-Error-404-Window"></i><span class="item-name">Not Found</span></a></li>
-                                    <li class="item-name"><a href="user.profile.html"><i class="nav-icon i-Male"></i><span class="item-name">User Profile</span></a></li>
-                                    <li class="item-name"><a class="open" href="blank.html"><i class="nav-icon i-File-Horizontal"></i><span class="item-name">Blank Page</span></a></li>
-                                </ul>
-                            </li>
-                            <li class="Ul_li--hover"><a href="http://demos.ui-lib.com/gull-html-doc/"><i class="i-Safe-Box1 text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Doc</span></a></li>
+                    <li class="Ul_li--hover">
+                        <a href="/perguruan-tinggi"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Perguruan Tinggi</span></a>
+                    </li>
+
+                    <li class="Ul_li--hover"><a class="has-arrow" href="#"><i class="i-File-Clipboard-File--Text text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Manajemen User</span></a>
+                        <ul class="mm-collapse">
+                            <li class="item-name"><a href="/role"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Role & Permission</span></a></li>
+                            <li class="item-name"><a href="/user"><i class="nav-icon i-Receipt-4"></i><span class="item-name">User</span></a></li>
                         </ul>
-                    </div>
-                </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
             <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
         </div>

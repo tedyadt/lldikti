@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lembaga;
 use App\Http\Requests\StoreLembagaRequest;
 use App\Http\Requests\UpdateLembagaRequest;
+use Yajra\Datatables\Datatables;
 
 class LembagaController extends Controller
 {
@@ -62,5 +63,21 @@ class LembagaController extends Controller
     public function destroy(Lembaga $lembaga)
     {
         //
+    }
+
+    public function getlembagabyidjson($id){
+        $lembagaById = Lembaga::select([
+            'id',
+            'lembaga_nama',
+            'lembaga_nama_singkat',
+            'lembaga_logo',
+            'lembaga_status'
+        ])->where('id', '=', $id)->get(); // Menggunakan get() untuk mengambil hasil dari kueri
+    
+        if ($lembagaById->isEmpty()) {
+            return response()->json([]); // Mengembalikan array kosong jika tidak ada data
+        }
+    
+        return Datatables::of($lembagaById)->make(true);
     }
 }

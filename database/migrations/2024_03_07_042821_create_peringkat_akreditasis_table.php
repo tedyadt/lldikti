@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('peringkat_akreditasis', function (Blueprint $table) {
             $table->id();
-            $table->string('peringkat_nama', 45);
+            $table->string('peringkat_nama', 45)->default('not set');
+            $table->string('peringkat_logo', 100)->default('not set');
             $table->timestamps();
         });
     }

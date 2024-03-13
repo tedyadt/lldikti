@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('akreditasi_prodis', function (Blueprint $table) {
             $table->id();
-            $table->string('akreditasi_prodi_sk', 200)->nullable(false);
+            $table->string('akreditasi_prodi_sk', 200)->nullable(false)->default('not set');
             $table->date('akreditasi_prodi_tgl_sk')->default(null);
             $table->date('akreditasi_prodi_tgl_akhir')->default(null);
             $table->enum('akreditasi_prodi_status', ['Aktif', 'Berakhir', 'not set'])->default('not set')->nullable();

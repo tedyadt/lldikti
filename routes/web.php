@@ -20,22 +20,20 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, "authenticate"])->name('login');
 Route::get('/logout', [LoginController::class, "unauthenticate"])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::group(['middleware' => ['auth']], function() {
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    require __DIR__.'/partial/badan_penyelenggara.php';
+    require __DIR__.'/partial/perguruan_tinggi.php';
+    require __DIR__.'/partial/lembaga.php';
+    require __DIR__.'/partial/peringkat_akreditasi.php';
+    require __DIR__.'/partial/role.php';
+    require __DIR__.'/partial/user.php';
+
 });
 
-Route::get('/auth', function () {
-    return view('auth');
-});
 
-Route::get('/pt', function () {
-    return view('form.form-input-pt');
-});
-
-Route::get('/ppt', function () {
-    return view('form.form-input-pt');
-});
 
 
