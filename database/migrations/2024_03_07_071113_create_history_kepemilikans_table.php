@@ -16,8 +16,6 @@ return new class extends Migration
 
             $table->date('tgl_hk_perubahan')->nullable(false)->default('1000-01-01');
             $table->longText('keterangan_hk')->nullable(false)->default('not set');
-            $table->date('tgl_hk_perubahan');
-            $table->longText('keterangan_hk');
             $table->timestamps();
         });
     }

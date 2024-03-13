@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     require __DIR__.'/partial/badan_penyelenggara.php';
     require __DIR__.'/partial/perguruan_tinggi.php';
-    require __DIR__.'/partial/lembaga.php';
+    require __DIR__.'/partial/lembaga_akreditasi.php';
     require __DIR__.'/partial/peringkat_akreditasi.php';
     require __DIR__.'/partial/role.php';
     require __DIR__.'/partial/user.php';

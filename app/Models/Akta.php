@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Akta extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
 
     public $fillable = [
         'akta_nomor', 'akta_tgl', 
@@ -19,6 +18,4 @@ class Akta extends Model
         'akta_dokumen',
         'id_bp','id_user'
     ];
-=======
->>>>>>> main
 }

@@ -16,9 +16,6 @@ return new class extends Migration
             $table->date('hpb_tgl_perubahan')->nullable(false)->default('1000-01-01');
             $table->date('hpb_tgl_awal_bentuk_lama')->nullable(false)->default('1000-01-01');
             $table->date('hpb_tgl_akhiri_bentuk_lama')->nullable(false)->default('1000-01-01');
-            $table->date('hpb_tgl_perubahan');
-            $table->date('hpb_tgl_awal_bentuk_lama');
-            $table->date('hpb_tgl_akhiri_bentuk_lama');
             $table->timestamps();
         });
     }

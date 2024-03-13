@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 $main_url = 'peringkat-akreditasi';
 
 Route::get('/'.$main_url.'/getperingkatakreditasibyidjson/{id}', [PeringkatAkreditasiController::class, 'getperingkatakreditasibyidjson'])->name($main_url.'.getById');
+Route::get('/'.$main_url.'/peringkatakreditasijson', [PeringkatAkreditasiController::class, 'peringkatakreditasijson']);
 Route::resource($main_url, PeringkatAkreditasiController::class)->names([
     'index' => $main_url,
     'store' =>  $main_url."store",

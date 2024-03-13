@@ -15,6 +15,13 @@
                         <a href="/dashboard"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Dashboard</span></a>
                     </li>
 
+                    <li class="Ul_li--hover"><a class="has-arrow" href="#"><i class="i-File-Clipboard-File--Text text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Master</span></a>
+                        <ul class="mm-collapse">
+                            <li class="item-name"><a href="/peringkat-akreditasi"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Peringkat Akreditesi</span></a></li>
+                            <li class="item-name"><a href="/lembaga-akreditasi"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Lembaga Akreditesi</span></a></li>
+                        </ul>
+                    </li>
+
                     <li class="Ul_li--hover">
                         <a href="/badan-penyelenggara"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Badan Penyelenggara</span></a>
                     </li>

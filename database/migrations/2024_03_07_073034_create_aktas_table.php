@@ -20,13 +20,6 @@ return new class extends Migration
             $table->enum('akta_status', ['Aktif','Tidak Aktif','not set'])->default('not set');
             $table->enum('akta_jenis', ['Aktif','Tidak Aktif','not set'])->default('not set');
             $table->string('akta_dokumen', 100)->nullable(false)->default('not set');
-            $table->string('nomor_akta',6)->nullable(false);
-            $table->date('tgl_akta');
-            $table->string('nama_akta',150);
-            $table->string('kota_akta',150);
-            $table->enum('status_akta', ['Aktif','Tidak Aktif','not set'])->default('not set');
-            $table->enum('jenis_akta', ['Aktif','Tidak Aktif','not set'])->default('not set');
-            $table->longText('dokumen_akta');
             $table->timestamps();
         });
     }

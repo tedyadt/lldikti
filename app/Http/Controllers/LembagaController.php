@@ -14,7 +14,7 @@ class LembagaController extends Controller
      */
     public function index()
     {
-        //
+        return  view('master.lembaga_akreditasi.index');
     }
 
     /**
@@ -22,15 +22,31 @@ class LembagaController extends Controller
      */
     public function create()
     {
-        //
-    }
+        return  view('master.lembaga_akreditasi.create');    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreLembagaRequest $request)
     {
-        //
+        try {
+            $validatedData = $request->validate([
+                'lembaga_nama' => 'required|string',
+                'lembaga_nama_singkat' => 'required|string',
+                'lembaga_status' => 'required|in:Aktif,Tidak Aktif',
+                'lembaga_logo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            ]);
+            if ($request->hasFile('lembaga_logo')) {
+                $filenameWithExt = $request->file('lembaga_logo')->getClientOriginalName(); $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('lembaga_logo')->getClientOriginalExtension(); $filenameSimpan = $filename.'_'.time().'.'.$extension;
+                $path = $request->file('lembaga_logo')->storeAs('public/lembaga_akreditasi', $filenameSimpan);
+                $validatedData['lembaga_logo'] = $filenameSimpan;
+            }
+            Lembaga::create($validatedData);
+            dd('Success');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
     /**
@@ -79,5 +95,17 @@ class LembagaController extends Controller
         }
     
         return Datatables::of($lembagaById)->make(true);
+    }
+
+    public function lembagaakreditasijson(){
+        $lembagaAkreditasi = Lembaga::select([
+            'id',
+            'lembaga_nama',
+            'lembaga_nama_singkat',
+            'lembaga_logo',
+            'lembaga_status'
+        ]);
+    
+        return Datatables::of($lembagaAkreditasi)->make(true);
     }
 }

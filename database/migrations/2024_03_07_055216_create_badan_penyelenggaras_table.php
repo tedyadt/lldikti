@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('bp_kontak', 200)->nullable(false)->default('not set');
             $table->string('bp_alamat')->nullable(false)->default('not set');
             $table->string('bp_logo')->nullable(false)->default('not set');
-            $table->string('bp_nama',45)->nullable(false);
-            $table->longText('bp_alamat');
             $table->enum('bp_status', ['Aktif','Tidak Aktif','not set'])->default('not set');
             $table->timestamps();
         });
