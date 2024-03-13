@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('bentuk_p_t_s', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
             $table->string('bentuk_perti_nama',100)->nullable(false)->default('not set');
+=======
+            $table->string('bentuk_nama',100);
+>>>>>>> main
             $table->timestamps();
         });
     }

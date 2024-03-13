@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kumham extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
     public $fillable = [
         'kumham_sk', 
         'kumham_tgl_sk',
@@ -17,4 +18,6 @@ class Kumham extends Model
         'id_akta', 
         'id_user'
     ];
+=======
+>>>>>>> main
 }

@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('history_kepemilikans', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
             $table->date('tgl_hk_perubahan')->nullable(false)->default('1000-01-01');
             $table->longText('keterangan_hk')->nullable(false)->default('not set');
+=======
+            $table->date('tgl_hk_perubahan');
+            $table->longText('keterangan_hk');
+>>>>>>> main
             $table->timestamps();
         });
     }

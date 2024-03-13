@@ -13,10 +13,17 @@ return new class extends Migration
     {
         Schema::create('kumhams', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
             $table->string('kumham_sk',30)->nullable(false)->default('not set');
             $table->date('kumham_tgl_sk')->nullable(false)->default('1000-01-01');
             $table->string('kumham_jenis',250)->nullable(false)->default('not set');
             $table->longText('kumham_dokumen')->nullable(false)->default('not set');
+=======
+            $table->string('sk_kumham',30)->nullable(false);
+            $table->date('tgl_sk_kumham');
+            $table->string('jenis_kumham',250);
+            $table->longText('dokumen_kumham');
+>>>>>>> main
             $table->timestamps();
         });
     }
