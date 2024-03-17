@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lembaga;
+use App\Models\AkreditasiPerti;
 use App\Models\PerguruanTinggi;
 use Yajra\Datatables\Datatables;
+use App\Models\BadanPenyelenggara;
 use Illuminate\Support\Facades\DB;
+use App\Models\PeringkatAkreditasi;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StorePerguruanTinggiRequest;
 use App\Http\Requests\UpdatePerguruanTinggiRequest;
-use App\Models\AkreditasiPerti;
 
 class PerguruanTinggiController extends Controller
 {
@@ -27,7 +30,21 @@ class PerguruanTinggiController extends Controller
     public function create()
     {
         abort_if(Gate::denies('create_data_perguruan_tinggi'), 403);
-        return view('perguruan_tinggi.create');
+        $lembaga_s = Lembaga::select([
+            'id', 'lembaga_nama', 'lembaga_nama_singkat', 'lembaga_logo'
+        ])->get();
+        $peringkat_s = PeringkatAkreditasi::select([
+            'id', 'peringkat_nama', 'peringkat_logo'
+        ])->get();
+        $badanPenyelenggara_s = BadanPenyelenggara::select([
+            'id', 'bp_nama', 'bp_status', 'bp_logo'
+        ])->get();
+
+        return view('perguruan_tinggi.create', [
+            'lembaga_s' => $lembaga_s,
+            'peringkat_s' => $peringkat_s,
+            'badanPenyelenggara_s' => $badanPenyelenggara_s
+        ]);
 
     }
 

@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('history_perkaras', function (Blueprint $table) {
-            $table->id();
-            $table->date('tgl_hp_kejadian')->nullable(false)->default('1000-01-01');
-            $table->longText('diskripsi_hp')->nullable(false)->default('not set');
-            $table->longText('solusi_hp')->nullable(false)->default('not set');
-            $table->enum('status_hp', ['Aktif','Tidak Aktif','not set'])->default('not set');
+            $table->uuid('id')->primary();
+            $table->date('hp_tgl_kejadian')->nullable(false)->default('1000-01-01');
+            $table->longText('hp_diskripsi')->nullable(false)->default('not set');
+            $table->longText('hp_solusi')->nullable(false)->default('not set');
+            $table->enum('hp_status', ['Aktif','Tidak Aktif','not set'])->default('not set');
             $table->timestamps();
         });
     }

@@ -9,7 +9,17 @@ class BadanPenyelenggara extends Model
 {
     use HasFactory;
 
+    public function getIncrementing(){
+        return false;
+    }
+
+    public function getKeyType(){
+        return 'string';
+    }
+
+    
     public $fillable = [
-        'bp_nama', 'bp_kontak', 'bp_alamat', 'id_user', 'bp_status'
+        'bp_nama', 'bp_email', 'bp_telp', 'bp_alamat', 'id_user', 'bp_status', 'id', 'bp_logo'
     ];
+
 }

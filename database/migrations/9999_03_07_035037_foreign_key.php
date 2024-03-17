@@ -19,130 +19,130 @@ return new class extends Migration
         // });
 
         Schema::table('akreditasi_prodis', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_peringkat_akreditasi')->nullable();
-            $table->foreign('id_peringkat_akreditasi')->references('id')->on('peringkat_akreditasis')->nullable();
+            $table->unsignedBigInteger('fk_peringkat_id');
+            $table->foreign('fk_peringkat_id')->references('id')->on('peringkat_akreditasis');
 
-            $table->unsignedBigInteger('id_lembaga')->nullable();
-            $table->foreign('id_lembaga')->references('id')->on('lembagas')->nullable();
+            $table->unsignedBigInteger('fk_lembaga_id');
+            $table->foreign('fk_lembaga_id')->references('id')->on('lembagas');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
 
-            $table->unsignedBigInteger('id_program_studi')->nullable();
-            $table->foreign('id_program_studi')->references('id')->on('program_studis')->nullable();
+            $table->foreignUuid('fk_program_studi_guid');
+            $table->foreign('fk_program_studi_guid')->references('id')->on('program_studis');
 
         });
 
         Schema::table('program_studis', function(Blueprint $table){
-            $table->unsignedBigInteger('id_perti')->nullable();
-            $table->foreign('id_perti')->references('id')->on('perguruan_tinggis')->nullable();
+            $table->foreignUuid('fk_perti_guid');
+            $table->foreign('fk_perti_guid')->references('id')->on('perguruan_tinggis');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
 
         Schema::table('perguruan_tinggis', function(Blueprint $table){
-            $table->unsignedBigInteger('id_bp')->nullable();
-            $table->foreign('id_bp')->references('id')->on('badan_penyelenggaras')->nullable();
+            $table->foreignUuid('fk_bp_guid');
+            $table->foreign('fk_bp_guid')->references('id')->on('badan_penyelenggaras');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
 
         Schema::table('akreditasi_pertis', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_peringkat_akreditasi')->nullable();
-            $table->foreign('id_peringkat_akreditasi')->references('id')->on('peringkat_akreditasis')->nullable();
+            $table->unsignedBigInteger('fk_peringkat_id');
+            $table->foreign('fk_peringkat_id')->references('id')->on('peringkat_akreditasis');
 
-            $table->unsignedBigInteger('id_perti')->nullable();
-            $table->foreign('id_perti')->references('id')->on('perguruan_tinggis')->nullable();
+            $table->foreignUuid('fk_perti_guid');
+            $table->foreign('fk_perti_guid')->references('id')->on('perguruan_tinggis');
 
-            $table->unsignedBigInteger('id_lembaga')->nullable();
-            $table->foreign('id_lembaga')->references('id')->on('lembagas')->nullable();
+            $table->unsignedBigInteger('fk_lembaga_id');
+            $table->foreign('fk_lembaga_id')->references('id')->on('lembagas');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
 
         Schema::table('pimpinan_pertis', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_perti')->nullable();
-            $table->foreign('id_perti')->references('id')->on('perguruan_tinggis')->nullable();
+            $table->foreignUuid('fk_perti_guid');
+            $table->foreign('fk_perti_guid')->references('id')->on('perguruan_tinggis');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
 
-            $table->unsignedBigInteger('id_jabatan')->nullable();
-            $table->foreign('id_jabatan')->references('id')->on('jabatans')->nullable();
+            $table->foreignUuid('fk_jabatan_guid');
+            $table->foreign('fk_jabatan_guid')->references('id')->on('jabatans');
         });
 
         Schema::table('history_perkaras', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_perti')->nullable();
-            $table->foreign('id_perti')->references('id')->on('perguruan_tinggis')->nullable();
+            $table->foreignUuid('fk_perti_guid');
+            $table->foreign('fk_perti_guid')->references('id')->on('perguruan_tinggis');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
 
         Schema::table('history_kepemilikans', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_perti')->nullable();
-            $table->foreign('id_perti')->references('id')->on('perguruan_tinggis')->nullable();
+            $table->foreignUuid('fk_perti_guid');
+            $table->foreign('fk_perti_guid')->references('id')->on('perguruan_tinggis');
 
-            $table->unsignedBigInteger('bp_lama')->nullable();
-            $table->foreign('bp_lama')->references('id')->on('badan_penyelenggaras')->nullable();
+            $table->foreignUuid('bp_lama');
+            $table->foreign('bp_lama')->references('id')->on('badan_penyelenggaras');
 
-            $table->unsignedBigInteger('bp_baru')->nullable();
-            $table->foreign('bp_baru')->references('id')->on('badan_penyelenggaras')->nullable();
+            $table->foreignUuid('bp_baru');
+            $table->foreign('bp_baru')->references('id')->on('badan_penyelenggaras');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
 
         Schema::table('kumhams', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_akta')->nullable();
-            $table->foreign('id_akta')->references('id')->on('aktas')->nullable();
+            $table->foreignUuid('fk_akta_guid');
+            $table->foreign('fk_akta_guid')->references('id')->on('aktas');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
 
         Schema::table('aktas', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_bp')->nullable();
-            $table->foreign('id_bp')->references('id')->on('badan_penyelenggaras')->nullable();
+            $table->foreignUuid('fk_bp_guid');
+            $table->foreign('fk_bp_guid')->references('id')->on('badan_penyelenggaras');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
         Schema::table('penguruses', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_akta')->nullable();
-            $table->foreign('id_akta')->references('id')->on('aktas')->nullable();
+            $table->foreignUuid('fk_akta_guid');
+            $table->foreign('fk_akta_guid')->references('id')->on('aktas');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
         Schema::table('history_perkara_b_p_s', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_bp')->nullable();
-            $table->foreign('id_bp')->references('id')->on('badan_penyelenggaras')->nullable();
+            $table->foreignUuid('fk_bp_guid');
+            $table->foreign('fk_bp_guid')->references('id')->on('badan_penyelenggaras');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
         });
         Schema::table('history_perubahan_bentuks', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_bentuk_sebelumnya')->nullable();
-            $table->foreign('id_bentuk_sebelumnya')->references('id')->on('bentuk_p_t_s')->nullable();
+            $table->foreignUuid('bentuk_sebelumnya');
+            $table->foreign('bentuk_sebelumnya')->references('id')->on('bentuk_p_t_s');
 
-            $table->unsignedBigInteger('id_bentuk_baru')->nullable();
-            $table->foreign('id_bentuk_baru')->references('id')->on('bentuk_p_t_s')->nullable();
+            $table->foreignUuid('bentuk_baru');
+            $table->foreign('bentuk_baru')->references('id')->on('bentuk_p_t_s');
 
-            $table->unsignedBigInteger('id_perti')->nullable();
-            $table->foreign('id_perti')->references('id')->on('perguruan_tinggis')->nullable();
+            $table->foreignUuid('fk_perti_guid');
+            $table->foreign('fk_perti_guid')->references('id')->on('perguruan_tinggis');
 
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
 
         });
 
         Schema::table('badan_penyelenggaras', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_user')->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullable();
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
 
         });
     
@@ -160,61 +160,61 @@ return new class extends Migration
         // });
 
         Schema::table('akreditasi_prodis', function (Blueprint $table){
-            $table->dropForeign(['id_peringkat_akreditasi']); 
-            $table->dropColumn('id_peringkat_akreditasi');
+            $table->dropForeign(['fk_peringkat_id']); 
+            $table->dropColumn('fk_peringkat_id');
 
-            $table->dropForeign(['id_lembaga']); 
-            $table->dropColumn('id_lembaga');
+            $table->dropForeign(['fk_lembaga_id']); 
+            $table->dropColumn('fk_lembaga_id');
 
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user');
 
-            $table->dropForeign(['id_program_studi']); 
-            $table->dropColumn('id_program_studi');
+            $table->dropForeign(['fk_program_studi_guid']); 
+            $table->dropColumn('fk_program_studi_guid');
 
         });
 
         Schema::table('program_studis', function (Blueprint $table) {
-            $table->dropForeign(['id_perti']); 
-            $table->dropColumn('id_perti'); 
+            $table->dropForeign(['fk_perti_guid']); 
+            $table->dropColumn('ifk_perti_guid'); 
 
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
         });
 
         Schema::table('program_studis', function (Blueprint $table) {
-            $table->dropForeign(['id_bp']); 
-            $table->dropColumn('id_bp'); 
+            $table->dropForeign(['fk_bp_guid']); 
+            $table->dropColumn('fk_bp_guid'); 
 
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
         });
 
         Schema::table('akreditasi_pertis', function (Blueprint $table) {
-            $table->dropForeign(['id_peringkat_akreditasi']); 
-            $table->dropColumn('id_peringkat_akreditasi'); 
+            $table->dropForeign(['fk_peringkat_guid']); 
+            $table->dropColumn('fk_peringkat_guid'); 
 
-            $table->dropForeign(['id_perti']); 
-            $table->dropColumn('id_perti'); 
+            $table->dropForeign(['fk_perti_guid']); 
+            $table->dropColumn('fk_perti_guid'); 
 
-            $table->dropForeign(['id_perti']); 
-            $table->dropColumn('id_perti'); 
+            $table->dropForeign(['fk_perti_guid']); 
+            $table->dropColumn('fk_perti_guid'); 
 
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
         });
 
         Schema::table('history_perkaras', function (Blueprint $table) {
-            $table->dropForeign(['id_perti']); 
-            $table->dropColumn('id_perti');
+            $table->dropForeign(['fk_perti_guid']); 
+            $table->dropColumn('fk_perti_guid');
             
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
         });
 
         Schema::table('history_kepemilikans', function (Blueprint $table) {
-            $table->dropForeign(['id_perti']); 
-            $table->dropColumn('id_perti');
+            $table->dropForeign(['fk_perti_guid']); 
+            $table->dropColumn('fk_perti_guid');
 
             $table->dropForeign(['bp_lama']); 
             $table->dropColumn('bp_lama');
@@ -227,43 +227,43 @@ return new class extends Migration
         });
 
         Schema::table('kumhams', function (Blueprint $table) {
-            $table->dropForeign(['id_akta']); 
-            $table->dropColumn('id_akta');
+            $table->dropForeign(['fk_akta_guid']); 
+            $table->dropColumn('fk_akta_guid');
             
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
         });
 
         Schema::table('aktas', function (Blueprint $table) {
-            $table->dropForeign(['id_bp']); 
-            $table->dropColumn('id_bp');
+            $table->dropForeign(['fk_bp_guid']); 
+            $table->dropColumn('fk_bp_guid');
             
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
         });
 
         Schema::table('penguruses', function (Blueprint $table) {
-            $table->dropForeign(['id_akta']); 
-            $table->dropColumn('id_akta');
+            $table->dropForeign(['fk_akta_guid']); 
+            $table->dropColumn('fk_akta_guid');
             
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
         });
 
         Schema::table('history_perkara_b_p_s', function (Blueprint $table) {
-            $table->dropForeign(['id_bp']); 
-            $table->dropColumn('id_bp');
+            $table->dropForeign(['fk_bp_guid']); 
+            $table->dropColumn('fk_bp_guid');
             
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
         });
 
         Schema::table('history_perubahan_bentuks', function (Blueprint $table) {
-            $table->dropForeign(['id_bentuk_sebelumnya']); 
-            $table->dropColumn('id_bentuk_sebelumnya');
+            $table->dropForeign(['bentuk_sebelumnya']); 
+            $table->dropColumn('bentuk_sebelumnya');
             
-            $table->dropForeign(['id_bentuk_baru']); 
-            $table->dropColumn('id_bentuk_baru'); 
+            $table->dropForeign(['bentuk_baru']); 
+            $table->dropColumn('bentuk_baru'); 
 
             $table->dropForeign(['id_akreditasi_prodi']); 
             $table->dropColumn('id_akreditasi_prodi'); 
@@ -273,14 +273,14 @@ return new class extends Migration
         });
         
         Schema::table('pimpinan_pertis', function (Blueprint $table) {
-            $table->dropForeign(['id_perti']); 
-            $table->dropColumn('id_perti');
+            $table->dropForeign(['fk_perti_guid']); 
+            $table->dropColumn('fk_perti_guid');
             
             $table->dropForeign(['id_user']); 
             $table->dropColumn('id_user'); 
 
-            $table->dropForeign(['id_jabatan']); 
-            $table->dropColumn('id_jabatan'); 
+            $table->dropForeign(['fk_jabatan_guid']); 
+            $table->dropColumn('fk_jabatan_guid'); 
         });
 
         Schema::table('badan_penyelenggaras', function (Blueprint $table) {

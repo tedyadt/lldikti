@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class HistoryPerkara extends Model
 {
     use HasFactory;
+
+    public function getIncrementing(){
+        return false;
+    }
+
+    public function getKeyType(){
+        return 'string';
+    }
+
 }

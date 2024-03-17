@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('history_perkara_b_p_s', function (Blueprint $table) {
-            $table->id();
-
+            $table->uuid('id')->primary();
             $table->date('hpbp_tgl_kejadian')->nullable(false)->default('1000-01-01');
             $table->longText('hpbp_deskripsi')->nullable(false)->default('not set');
             $table->longText('hpbp_solusi')->nullable(false)->default('not set');

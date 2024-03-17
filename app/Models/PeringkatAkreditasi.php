@@ -9,6 +9,7 @@ class PeringkatAkreditasi extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'peringkat_nama',
         'peringkat_logo'

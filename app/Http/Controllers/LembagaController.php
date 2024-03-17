@@ -37,8 +37,7 @@ class LembagaController extends Controller
                 'lembaga_logo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
             if ($request->hasFile('lembaga_logo')) {
-                $filenameWithExt = $request->file('lembaga_logo')->getClientOriginalName(); $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $request->file('lembaga_logo')->getClientOriginalExtension(); $filenameSimpan = $filename.'_'.time().'.'.$extension;
+                $filenameSimpan = $this->generateFilename($request->file('lembaga_logo')->getClientOriginalExtension(),'logo'.$request->lembaga_nama_singkat, rand(0,100));
                 $path = $request->file('lembaga_logo')->storeAs('public/lembaga_akreditasi', $filenameSimpan);
                 $validatedData['lembaga_logo'] = $filenameSimpan;
             }
@@ -81,7 +80,7 @@ class LembagaController extends Controller
         //
     }
 
-    public function getlembagabyidjson($id){
+    public function getlembagaakreditasibyidjson($id){
         $lembagaById = Lembaga::select([
             'id',
             'lembaga_nama',

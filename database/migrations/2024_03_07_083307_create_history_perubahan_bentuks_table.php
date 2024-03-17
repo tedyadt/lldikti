@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('history_perubahan_bentuks', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->date('hpb_tgl_perubahan')->nullable(false)->default('1000-01-01');
             $table->date('hpb_tgl_awal_bentuk_lama')->nullable(false)->default('1000-01-01');
             $table->date('hpb_tgl_akhiri_bentuk_lama')->nullable(false)->default('1000-01-01');

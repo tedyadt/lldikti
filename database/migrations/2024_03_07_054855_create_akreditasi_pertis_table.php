@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('akreditasi_pertis', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('akeditasi_pt_sk', 45)->nullable(false)->default('not set');
             $table->date('akreditasi_pt_tgl_sk')->nullable(false)->default('1000-01-01');
             $table->date('akreditasi_pt_tgl_akhir')->nullable(false)->default('1000-01-01');

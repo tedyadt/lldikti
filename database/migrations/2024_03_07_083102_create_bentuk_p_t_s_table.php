@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bentuk_p_t_s', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('bentuk_perti_nama',100)->nullable(false)->default('not set');
             $table->timestamps();
         });

@@ -27,6 +27,7 @@
                                     <th>Nama Lembaga</th>
                                     <th>Singkatan Lembaga</th>
                                     <th>Status</th>
+                                    <th>Logo</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -80,6 +81,7 @@
                 },
                 { data: 'lembaga_nama', name: 'lembaga_nama'},
                 { data: 'lembaga_nama_singkat', name: 'lembaga_nama_singkat'},
+                { data: 'lembaga_status', name: 'lembaga_status'},
                 {
                 data: 'lembaga_logo',
                 name: 'lembaga_logo',

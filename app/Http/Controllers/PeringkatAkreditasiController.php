@@ -37,9 +37,9 @@ class PeringkatAkreditasiController extends Controller
                 'peringkat_nama' => 'required|string',
                 'peringkat_logo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
+            
             if ($request->hasFile('peringkat_logo')) {
-                $filenameWithExt = $request->file('peringkat_logo')->getClientOriginalName(); $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $request->file('peringkat_logo')->getClientOriginalExtension(); $filenameSimpan = $filename.'_'.time().'.'.$extension;
+                $filenameSimpan = $this->generateFilename( $request->file('peringkat_logo')->getClientOriginalExtension(), 'logo_'.$request->peringkat_nama, rand(0,100));
                 $path = $request->file('peringkat_logo')->storeAs('public/peringkat_akreditasi', $filenameSimpan);
                 $validatedData['peringkat_logo'] = $filenameSimpan;
             }

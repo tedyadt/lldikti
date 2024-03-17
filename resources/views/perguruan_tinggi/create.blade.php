@@ -126,13 +126,14 @@
                                 <label for="">Badan Penyelenggara<span style="color: red">*</span></label>
                                 <select id="badan-penyelenggara-select" class="js-example-basic-single" name="id_bp" style="width: 100%" required>
                                     <option value="">Pilih</option>
-                                    <option value="1">BP 1</option>
-                                    <option value="1">BP 2</option>
+                                    @foreach ($badanPenyelenggara_s as $item)
+                                    <option value="{{ $item->id }}">{{ $item->bp_nama }}</option>    
+                                    @endforeach
                                 </select> 
                             </div>
                             <div class="row m-3">
                                 <div class="col-md-5 d-flex justify-content-center align-items-center">
-                                    <img class="img-fluid rounded mb-2" id="bp_logo" data-url="{{ asset('storage/badan_penyelenggara/') }}"  alt="" />
+                                    <img class="img-fluid rounded mb-2" id="bp_logo" data-url="{{ asset('storage/badan_penyelenggara/logo/') }}"  alt="" />
                                 </div>
                                 <div class="col-md-5 d-flex justify-content-center align-items-center flex-column">
                                     <h2 id="bp_nama" class="font-weight-bold text-center mb-0"></h2>
@@ -174,12 +175,14 @@
                                 <label for="">Lembaga Akreditasi<span style="color: red">*</span></label>
                                 <select id="lembaga-akreditasi-select" style="width: 100%" class="js-example-basic-single" name="id_lembaga" required>
                                     <option value="">Pilih</option>
-                                    <option value="1">Ban-PT</option>
-                                    <option value="2">LAM-PTKES</option>
+                                    @foreach ($lembaga_s as $item)
+                                    <option value="{{ $item->id }}">{{ $item->lembaga_nama }}</option>    
+                                    @endforeach
+
                                 </select> 
                                 <div class="row">
                                     <div class="col-md-5 d-flex justify-content-center align-items-center">
-                                        <img class="img-fluid rounded mb-2" id="lembaga_logo" data-url="{{ asset('storage/akreditasi/') }}"  alt="" />
+                                        <img class="img-fluid rounded mb-2" id="lembaga_logo" data-url="{{ asset('storage/lembaga_akreditasi/') }}"  alt="" />
                                     </div>
                                     <div class="col-md-5 d-flex justify-content-center align-items-center">
                                         <h6 id="lembaga_nama" class="font-weight-bold text-center mb-0"></h6>
@@ -190,12 +193,14 @@
                                 <label for="">Peringkat Akreditasi<span style="color: red">*</span></label>
                                 <select id="peringkat-akreditasi-select" style="width: 100%" class="js-example-basic-single" name="id_peringkat_akreditasi" required>
                                     <option value="">Pilih</option>
-                                    <option value="1">A</option>
-                                    <option value="2">B</option>
+                                    @foreach ($peringkat_s as $item)
+                                    <option value="{{ $item->id }}">{{ $item->peringkat_nama }}</option>    
+                                    @endforeach
+
                                 </select> 
                                 <div class="row">
                                     <div class="col-md-5 d-flex justify-content-center align-items-center">
-                                        <img class="img-fluid rounded mb-2" id="akreditasi_logo" data-url="{{ asset('storage/badan_penyelenggara/') }}"  alt="" />
+                                        <img class="img-fluid rounded mb-2" id="akreditasi_logo" data-url="{{ asset('storage/peringkat_akreditasi/') }}"  alt="" />
                                     </div>
                                     <div class="col-md-5 d-flex justify-content-center align-items-center flex-column">
                                         <h6 id="akreditasi_nama" class="font-weight-bold text-center mb-0"></h6>
@@ -208,7 +213,6 @@
             </div>
 
         </div>
-
 
     </form>
 
@@ -238,10 +242,19 @@
             readURL(this, '#perti_logo_preview');
         });
 
-        // Ketika pengguna memilih file img, perbarui label
+        // Ketika pengguna memilih file PERTI, perbarui label
         $('#perti_logo').change(function() {
             var fileName = $(this).val().split('\\').pop(); // Mengambil nama file dari path lengkap
-            $('#perti_logo_label').text(fileName); // Mengatur label dengan nama file
+
+            // Memeriksa panjang nama file
+            if (fileName.length > 20) {
+                // Jika lebih dari 20 karakter, singkat nama file
+                var shortenedFileName = fileName.substr(0, 15) + '...' + fileName.substr(-7);
+                $('#perti_logo_label').text(shortenedFileName); // Mengatur label dengan nama file yang disingkat
+            } else {
+                // Jika tidak, gunakan nama file lengkap
+                $('#perti_logo_label').text(fileName); // Mengatur label dengan nama file
+            }
         });
 
 
@@ -253,10 +266,19 @@
             readURL(this, '#file_sk_preview');
         });
 
-        // Ketika pengguna memilih file akta, perbarui label
+        // Ketika pengguna memilih file SK, perbarui label
         $('#file_sk').change(function() {
             var fileName = $(this).val().split('\\').pop(); // Mengambil nama file dari path lengkap
-            $('#file_sk_label').text(fileName); // Mengatur label dengan nama file
+
+            // Memeriksa panjang nama file
+            if (fileName.length > 20) {
+                // Jika lebih dari 20 karakter, singkat nama file
+                var shortenedFileName = fileName.substr(0, 15) + '...' + fileName.substr(-7);
+                $('#file_sk_label').text(shortenedFileName); // Mengatur label dengan nama file yang disingkat
+            } else {
+                // Jika tidak, gunakan nama file lengkap
+                $('#file_sk_label').text(fileName); // Mengatur label dengan nama file
+            }
         });
 
     </script>
@@ -311,14 +333,14 @@
                 }else{
                     let bpLogoUrl = $('#lembaga_logo').data('url');
                     $.ajax({
-                        url: '{{ route("lembaga.getById", ":value") }}'.replace(':value', selectedValue),
+                        url: '{{ route("lembaga-akreditasi.getById", ":value") }}'.replace(':value', selectedValue),
                         type: 'GET',
                         success: function(response) {
                             let logoUrl = bpLogoUrl + '/'+ response.data[0]['lembaga_logo'];
     
                             $('#lembaga_logo').attr('src', logoUrl);                        
                             $('#lembaga_nama').text(response.data[0]['lembaga_nama']);
-                            $('lembaga_status').text(response.data[0]['lembaga_status']);
+                            $('#lembaga_status').text(response.data[0]['lembaga_status']);
                         },
                         error: function(xhr) {
                             console.log(xhr.responseText);
@@ -343,7 +365,7 @@
                     $('#akreditasi_nama').text('');
 
                 }else{
-                    let peringkatAkreditasiLogoUrl = $('#lembaga_logo').data('url');
+                    let peringkatAkreditasiLogoUrl = $('#akreditasi_logo').data('url');
                     $.ajax({
                         url: '{{ route("peringkat-akreditasi.getById", ":value") }}'.replace(':value', selectedValue),
                         type: 'GET',

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Akta;
+use App\Models\Kumham;
+use Illuminate\Support\Str;
 use Yajra\Datatables\Datatables;
 use App\Models\BadanPenyelenggara;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreBadanPenyelenggaraRequest;
 use App\Http\Requests\UpdateBadanPenyelenggaraRequest;
-use App\Models\Kumham;
+use Ramsey\Uuid\Uuid;
 
 class BadanPenyelenggaraController extends Controller
 {
@@ -19,7 +21,6 @@ class BadanPenyelenggaraController extends Controller
     public function index()
     {
         abort_if(Gate::denies('access_data_badan_penyelenggara'), 403);
-
         return view('badan_penyelenggara.index');
     }
 
@@ -29,7 +30,7 @@ class BadanPenyelenggaraController extends Controller
     public function create()
     {
         abort_if(Gate::denies('create_data_badan_penyelenggara'), 403);
-
+        
         return view('badan_penyelenggara.create');
     }
 
@@ -41,15 +42,25 @@ class BadanPenyelenggaraController extends Controller
         abort_if(Gate::denies('create_data_badan_penyelenggara'), 403);
 
         try{
-            // dd($request);
-
+            $validatedDataAgreement = $request->validate([
+                'agreement' => 'required',
+                'id_user' => 'required|exists:users,id'
+            ]);
+            $id_user = $validatedDataAgreement['id_user'];
+            
             $validatedDataBP = $request->validate([
                 'bp_nama' => 'required|string',
                 'bp_alamat' => 'required|string',
-                'bp_kontak' => 'required|string',
+                'bp_email' => 'required|email|unique:badan_penyelenggaras,bp_email',
+                'bp_telp' => 'required|numeric|unique:badan_penyelenggaras,bp_telp',
                 'bp_status' => 'required|in:Aktif,Tidak Aktif',
                 'bp_logo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);
+            $bpGuid = Uuid::uuid4()->toString();
+            $validatedDataBP['id'] = $bpGuid;
+            $validatedDataBP['id_user'] = $id_user;
+            $filenameSimpanBP = $this->generateFilename($request->file('bp_logo')->getClientOriginalExtension(), 'Logo_BP', $bpGuid);
+            $validatedDataBP['bp_logo'] = $filenameSimpanBP;
 
             $validatedDataAkta = $request->validate([
                 'akta_nomor' => 'required|string|unique:aktas,akta_nomor',
@@ -60,8 +71,16 @@ class BadanPenyelenggaraController extends Controller
                 'akta_jenis' => 'required|in:Aktif,Tidak Aktif',
                 'akta_dokumen' => 'required|mimes:pdf|max:2048'
             ]);
+            $aktaGuid = Uuid::uuid4()->toString();
+            $validatedDataAkta['id'] = $aktaGuid;
+            $validatedDataAkta['fk_bp_guid'] = $bpGuid;
+            $validatedDataAkta['id_user'] = $id_user;
+            $filenameSimpanAkta = $this->generateFilename($request->file('akta_dokumen')->getClientOriginalExtension(),'Akta_Dokumen', $aktaGuid);
+            $validatedDataAkta['akta_dokumen'] = $filenameSimpanAkta;
 
+            // dd($validatedDataBP);
 
+            $filenameSimpanKumham = '';
             if(request('buat_sk_kumham') == 'on'){
                 $validatedDataKumham = $request->validate([
                     "kumham_sk" => "required|string|unique:kumhams,kumham_sk,",
@@ -69,29 +88,26 @@ class BadanPenyelenggaraController extends Controller
                     "kumham_jenis" => "required|string",
                     'kumham_dokumen' => 'required|mimes:pdf|max:2048'
                 ]);
+                $kumhamGuid = Uuid::uuid4()->toString();
+                $validatedDataKumham["id"] = $kumhamGuid;
+                $validatedDataKumham['fk_akta_guid'] = $aktaGuid;
+                $validatedDataKumham['id_user'] = $id_user;
+                $filenameSimpanKumham = $this->generateFilename($request->file('kumham_dokumen')->getClientOriginalExtension(),'Kumham', $kumhamGuid);
+                $validatedDataKumham['kumham_dokumen'] = $filenameSimpanKumham;
             }
 
             //store file
-            DB::transaction(function () use ($request) {
-                if ($request->hasFile('bp_logo')) {
-                    $filenameWithExt = $request->file('bp_logo')->getClientOriginalName(); $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                    $extension = $request->file('bp_logo')->getClientOriginalExtension(); $filenameSimpan = $filename.'_'.time().'.'.$extension;
-                    $path = $request->file('bp_logo')->storeAs('public/badan_penyelenggara', $filenameSimpan);
-                    $validatedDataBP['bp_logo'] = $filenameSimpan;
+            DB::transaction(function () use ($request, $filenameSimpanBP, $filenameSimpanAkta, $filenameSimpanKumham) {
+                if ($request->hasFile('bp_logo')) { 
+                    $storeBP = $request->file('bp_logo')->storeAs('public/badan_penyelenggara/logo/', $filenameSimpanBP);
                 }
     
                 if ($request->hasFile('akta_dokumen')) {
-                    $filenameWithExt = $request->file('akta_dokumen')->getClientOriginalName(); $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                    $extension = $request->file('akta_dokumen')->getClientOriginalExtension(); $filenameSimpan = $filename.'_'.time().'.'.$extension;
-                    $path = $request->file('akta_dokumen')->storeAs('public/badan_penyelenggara', $filenameSimpan);
-                    $validatedDataAkta['akta_dokumen'] = $filenameSimpan;
+                    $storeAkta = $request->file('akta_dokumen')->storeAs('public/badan_penyelenggara/akta/', $filenameSimpanAkta);
                 }
     
-                if ($request->hasFile('kumham_dokumen') && request('buat_sk_kumham') == 'on') {
-                    $filenameWithExt = $request->file('kumham_dokumen')->getClientOriginalName(); $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                    $extension = $request->file('kumham_dokumen')->getClientOriginalExtension(); $filenameSimpan = $filename.'_'.time().'.'.$extension;
-                    $path = $request->file('kumham_dokumen')->storeAs('public/badan_penyelenggara', $filenameSimpan);
-                    $validatedDataKumham['kumham_dokumen'] = $filenameSimpan;
+                if ($request->hasFile('kumham_dokumen') && request('buat_sk_kumham') == 'on') {                   
+                    $storeKumham = $request->file('kumham_dokumen')->storeAs('public/badan_penyelenggara/kumham/', $filenameSimpanKumham);
                 }
             });
             
@@ -129,9 +145,24 @@ class BadanPenyelenggaraController extends Controller
     {
         abort_if(Gate::denies('show_data_badan_penyelenggara'), 403);
 
-        return view('badan_penyelenggara.detail', [
-            'bp' => $badanPenyelenggara,
-        ]);
+        try{
+            $badanPenyelenggara_detail = BadanPenyelenggara::select([
+                'bp_email', 'bp_alamat', 'bp_status', 'bp_logo', 'bp_nama', 'bp_telp',
+    
+                'aktas.akta_nomor', 'aktas.akta_tgl', 'aktas.akta_status', 'aktas.akta_dokumen', 
+    
+                'kumhams.kumham_tgl_sk', 'kumhams.kumham_sk', 'kumhams.kumham_jenis', 'kumhams.kumham_dokumen'
+            ])->join('aktas', 'aktas.fk_bp_guid', '=', 'badan_penyelenggaras.id')
+              ->join('kumhams', 'kumhams.fk_akta_guid', '=', 'aktas.id')
+              ->first();
+    
+            return view('badan_penyelenggara.detail', [
+                'bp' => $badanPenyelenggara_detail,
+            ]);    
+        }catch(\Exception $e){
+            dd($e->getMessage());
+        }
+
     }
 
     /**

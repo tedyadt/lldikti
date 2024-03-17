@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('aktas', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('akta_nomor',45)->nullable(false)->default('not set');
             $table->date('akta_tgl')->nullable(false)->default('1000-01-01');
             $table->string('akta_nama_notaris',150)->nullable(false)->default('not set');

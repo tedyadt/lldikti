@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pimpinan_pertis', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('pimpinan_nama',100)->nullable(false)->default('not set');
             $table->string('pimpinan_telp',45)->nullable(false)->default('not set');
             $table->string('pimpinan_email',100)->nullable(false)->default('not set');

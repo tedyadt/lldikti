@@ -9,6 +9,15 @@ class PerguruanTinggi extends Model
 {
     use HasFactory;
 
+    public function getIncrementing(){
+        return false;
+    }
+
+    public function getKeyType(){
+        return 'string';
+    }
+
+
     protected $fillable = [
         'perti_nama',
         'perti_nama_singkat',
@@ -23,5 +32,7 @@ class PerguruanTinggi extends Model
         'keterangan',
         'id_bp',
         'perti_logo',
+        'perti_guid',
+        'perti_kode'
     ];
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('lembaga_nama', 200)->nullable(false)->default('not set');
             $table->string('lembaga_nama_singkat', 50)->nullable(false)->default('not set');
-            $table->string('lembaga_logo', 100)->nullable(false)->default('not set');
+            $table->string('lembaga_logo', 150)->nullable(false)->default('not set');
             $table->enum('lembaga_status', ['Aktif','Tidak Aktif']);
             $table->timestamps();
         });

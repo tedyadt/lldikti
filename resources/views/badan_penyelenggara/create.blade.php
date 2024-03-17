@@ -35,9 +35,16 @@
                                 <label for="bp_alamat">Alamat Badan Penyelenggara <span style="color: red">*</span></label>
                                 <textarea class="form-control" id="bp_alamat" rows="3" name="bp_alamat"  required></textarea>
                             </div>
-                            <div class="col-md-6 form-group mb-3">
-                                <label for="bp_kontak">Kontak Badan Penyelenggara<span style="color: red">*</span></label>
-                                <textarea class="form-control" id="bp_kontak" rows="3" name="bp_kontak"  required></textarea>
+                            <div class="col-md-6">
+                                <label for="bp_alamat">Kontak Badan Penyelenggara <span style="color: red">*</span></label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Email</span></div>
+                                    <input class="form-control" type="text" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" required name="bp_email" />
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">Telepon</span></div>
+                                    <input class="form-control" type="text" placeholder="Telepon" aria-label="Username" aria-describedby="basic-addon1" required name="bp_telp"/>
+                                </div>
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="bp_status">Status Badan Penyelenggara<span style="color: red">*</span></label>
@@ -177,6 +184,26 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-8 mb-4">
+                <div class="card text-left">
+                    <div class="card-body">
+                        <p>
+                            Kami dengan ini mengonfirmasi bahwa pengguna dengan<br>
+                            nama    : {{ Auth::user()->name }}<br>
+                            NIP     : {{ Auth::user()->nip }}<br>
+                            email   : {{ Auth::user()->email }}<br>
+                            yang tercantum telah setuju untuk bertindak sebagai penanggung jawab atas data yang dibuat.
+                        </p>
+                        <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
+                        <label class="checkbox checkbox-primary">
+                            <input type="checkbox" name="agreement" required /><span>Checklist Untuk Menyetujui</span><span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </form>
 
 </div>
@@ -207,7 +234,16 @@
         // Ketika pengguna memilih file img, perbarui label
         $('#logoInp').change(function() {
             var fileName = $(this).val().split('\\').pop(); // Mengambil nama file dari path lengkap
-            $('#imgLabelLogo').text(fileName); // Mengatur label dengan nama file
+
+            // Memeriksa panjang nama file
+            if (fileName.length > 20) {
+                // Jika lebih dari 10 karakter, singkat nama file
+                var shortenedFileName = fileName.substr(0, 15) + '...' + fileName.substr(-7);
+                $('#imgLabelLogo').text(shortenedFileName); // Mengatur label dengan nama file yang disingkat
+            } else {
+                // Jika tidak, gunakan nama file lengkap
+                $('#imgLabelLogo').text(fileName); // Mengatur label dengan nama file
+            }
         });
 
 
@@ -222,7 +258,16 @@
         // Ketika pengguna memilih file akta, perbarui label
         $('#aktaFileInp').change(function() {
             var fileName = $(this).val().split('\\').pop(); // Mengambil nama file dari path lengkap
-            $('#aktaFileLabelLogo').text(fileName); // Mengatur label dengan nama file
+
+            // Memeriksa panjang nama file
+            if (fileName.length > 20) {
+                // Jika lebih dari 20 karakter, singkat nama file
+                var shortenedFileName = fileName.substr(0, 15) + '...' + fileName.substr(-7);
+                $('#aktaFileLabelLogo').text(shortenedFileName); // Mengatur label dengan nama file yang disingkat
+            } else {
+                // Jika tidak, gunakan nama file lengkap
+                $('#aktaFileLabelLogo').text(fileName); // Mengatur label dengan nama file
+            }
         });
 
     </script>
@@ -236,8 +281,18 @@
         // Ketika pengguna memilih file akta, perbarui label
         $('#kumhamFileInp').change(function() {
             var fileName = $(this).val().split('\\').pop(); // Mengambil nama file dari path lengkap
-            $('#kumhamFileLabelLogo').text(fileName); // Mengatur label dengan nama file
+
+            // Memeriksa panjang nama file
+            if (fileName.length > 20) {
+                // Jika lebih dari 20 karakter, singkat nama file
+                var shortenedFileName = fileName.substr(0, 15) + '...' + fileName.substr(-7);
+                $('#kumhamFileLabelLogo').text(shortenedFileName); // Mengatur label dengan nama file yang disingkat
+            } else {
+                // Jika tidak, gunakan nama file lengkap
+                $('#kumhamFileLabelLogo').text(fileName); // Mengatur label dengan nama file
+            }
         });
+
 
         // Menangkap elemen checkbox
         var checkbox = document.getElementById('buat_sk_kumham');

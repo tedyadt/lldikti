@@ -12,28 +12,38 @@
                 <ul class="metismenu" id="menu">
                     <!-- Dashboard -->
                     <li class="Ul_li--hover">
-                        <a href="/dashboard"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Dashboard</span></a>
+                        <a href="{{ route('dashboard') }}"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Dashboard</span></a>
                     </li>
 
                     <li class="Ul_li--hover"><a class="has-arrow" href="#"><i class="i-File-Clipboard-File--Text text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Master</span></a>
                         <ul class="mm-collapse">
-                            <li class="item-name"><a href="/peringkat-akreditasi"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Peringkat Akreditesi</span></a></li>
-                            <li class="item-name"><a href="/lembaga-akreditasi"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Lembaga Akreditesi</span></a></li>
+                            <li class="item-name">
+                                <a href="{{ route('peringkat-akreditasi') }}">
+                                    <i class="nav-icon i-Receipt-4"></i>
+                                    <span class="item-name text-20">Peringkat Akreditesi</span>
+                                </a>
+                            </li>
+                            <li class="item-name">
+                                <a href="{{ route('lembaga-akreditasi') }}">
+                                    <i class="nav-icon i-Receipt-4"></i>
+                                    <span class="item-name">Lembaga Akreditesi</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
                     <li class="Ul_li--hover">
-                        <a href="/badan-penyelenggara"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Badan Penyelenggara</span></a>
+                        <a href="{{ route('badan-penyelenggara') }}"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Badan Penyelenggara</span></a>
                     </li>
 
                     <li class="Ul_li--hover">
-                        <a href="/perguruan-tinggi"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Perguruan Tinggi</span></a>
+                        <a href="{{ route('perguruan-tinggi') }}"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Perguruan Tinggi</span></a>
                     </li>
 
                     <li class="Ul_li--hover"><a class="has-arrow" href="#"><i class="i-File-Clipboard-File--Text text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Manajemen User</span></a>
                         <ul class="mm-collapse">
-                            <li class="item-name"><a href="/role"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Role & Permission</span></a></li>
-                            <li class="item-name"><a href="/user"><i class="nav-icon i-Receipt-4"></i><span class="item-name">User</span></a></li>
+                            <li class="item-name"><a href="{{ route('role') }}"><i class="nav-icon i-Receipt-4"></i><span class="item-name">Role & Permission</span></a></li>
+                            <li class="item-name"><a href="{{ route('user') }}"><i class="nav-icon i-Receipt-4"></i><span class="item-name">User</span></a></li>
                         </ul>
                     </li>
 

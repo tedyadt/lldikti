@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('perguruan_tinggis', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('perti_nama', 150)->nullable(false)->default('not set');
             $table->string("perti_nama_singkat")->nullable(false)->default('not set');
+            $table->char("perti_kode", 6)->nullable(false)->unique();
             $table->string("perti_logo")->nullable(false)->default('not set');
             $table->string('perti_kota',45)->nullable(false)->default('not set');
             $table->enum('perti_status', ['Aktif','Pembinaan','Alih Bentuk','Alih Kelola','Tutup', 'not set'])->default('not set');

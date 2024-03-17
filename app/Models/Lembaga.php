@@ -9,6 +9,7 @@ class Lembaga extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'lembaga_nama',
         'lembaga_nama_singkat',
