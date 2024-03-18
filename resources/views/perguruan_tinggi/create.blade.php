@@ -23,6 +23,22 @@
         <button class="btn btn-primary ripple mb-3" type="submit">Submit</button>
 
         <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card text-left">
+                    <div class="card-body">
+                        {{-- your conten should be here --}}
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="perti_kode">Kode PT<span style="color: red">*</span></label>
+                                <textarea class="form-control" id="perti_kode" rows="3" name="perti_kode"  required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-8 mb-4">
                 <div class="card text-left">
                     <div class="card-body">
@@ -124,7 +140,7 @@
                         <div class="row ">
                             <div class="col-md-12 form-group mb-3">
                                 <label for="">Badan Penyelenggara<span style="color: red">*</span></label>
-                                <select id="badan-penyelenggara-select" class="js-example-basic-single" name="id_bp" style="width: 100%" required>
+                                <select id="badan-penyelenggara-select" class="js-example-basic-single" name="fk_bp_guid" style="width: 100%" required>
                                     <option value="">Pilih</option>
                                     @foreach ($badanPenyelenggara_s as $item)
                                     <option value="{{ $item->id }}">{{ $item->bp_nama }}</option>    
@@ -173,7 +189,7 @@
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="">Lembaga Akreditasi<span style="color: red">*</span></label>
-                                <select id="lembaga-akreditasi-select" style="width: 100%" class="js-example-basic-single" name="id_lembaga" required>
+                                <select id="lembaga-akreditasi-select" style="width: 100%" class="js-example-basic-single" name="fk_lembaga_id" required>
                                     <option value="">Pilih</option>
                                     @foreach ($lembaga_s as $item)
                                     <option value="{{ $item->id }}">{{ $item->lembaga_nama }}</option>    
@@ -191,7 +207,7 @@
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="">Peringkat Akreditasi<span style="color: red">*</span></label>
-                                <select id="peringkat-akreditasi-select" style="width: 100%" class="js-example-basic-single" name="id_peringkat_akreditasi" required>
+                                <select id="peringkat-akreditasi-select" style="width: 100%" class="js-example-basic-single" name="fk_peringkat_id" required>
                                     <option value="">Pilih</option>
                                     @foreach ($peringkat_s as $item)
                                     <option value="{{ $item->id }}">{{ $item->peringkat_nama }}</option>    
@@ -214,6 +230,25 @@
 
         </div>
 
+        <div class="row">
+            <div class="col-md-8 mb-4">
+                <div class="card text-left">
+                    <div class="card-body">
+                        <p>
+                            Kami dengan ini mengonfirmasi bahwa pengguna dengan<br>
+                            nama    : {{ Auth::user()->name }}<br>
+                            NIP     : {{ Auth::user()->nip }}<br>
+                            email   : {{ Auth::user()->email }}<br>
+                            yang tercantum telah setuju untuk bertindak sebagai penanggung jawab atas data yang dibuat.
+                        </p>
+                        <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
+                        <label class="checkbox checkbox-primary">
+                            <input type="checkbox" name="agreement" required /><span>Checklist Untuk Menyetujui</span><span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 
 </div>

@@ -90,8 +90,8 @@
                             <div class="col-md-6 col-6">
                                 <h4>Daftar Pimpinan Perguruan Tinggi</h4>
                                 <div class="button-group mb-3">
-                                    <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-secondary">Detail</button>
+
+                                <a href="{{ route('pimpinan-perti', ['id_perti' => $perti->id]) }}"><button type="button" class="btn btn-sm btn-secondary">Detail</button></a>
                                 </div>
 
                                 <div class="table-responsive">

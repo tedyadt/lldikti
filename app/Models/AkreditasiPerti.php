@@ -22,9 +22,10 @@ class AkreditasiPerti extends Model
         'akreditasi_pt_tgl_sk',
         'akreditasi_pt_tgl_akhir',
         'akreditasi_pt_status',
-        'id_peringkat_akreditasi ',
-        'id_perti',
-        'id_lembaga',
-        'id_user '
+        'fk_peringkat_id',
+        'fk_perti_guid',
+        'fk_lembaga_id',
+        'id_user',
+        'id'
     ];
 }
