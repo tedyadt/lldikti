@@ -5,29 +5,31 @@
 @endsection
 
 @section('main-content')
-
+@php 
+$pertiId = $_GET['id_perti'];
+@endphp
 <div class="main-content pt-4">
     <div class="breadcrumb">
-        <h1 class="mr-2">Daftar Perguruan Tinggi</h1>
+        <h1>Blank</h1>
+        <ul>
+            <li><a href="">Pages</a></li>
+            <li>Blank</li>
+        </ul>
     </div>
-    <div class="separator-breadcrumb border-top"></div>
+    <div class="separator-breadcrumb border-top"></div><!-- end of main-content -->
     <div class="row">
         <div class="col-md-12 mb-4">
             <div class="card text-left">
                 <div class="card-body">
-                    {{-- your conten should be here --}}
                     <div class="table-responsive">
                         <table class="display table table-striped table-bordered" id="main_table" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>id</th>
                                     <th>No</th>
-                                    <th>Kode</th>
-                                    <th>Nama Perguruan Tinggi</th>
-                                    <th>Kota</th>
-                                    <th>Status</th>
-                                    <th>Akreditasi</th>
-                                    <th>Keterangan</th>
+                                    <th>Nama</th>
+                                    <th>Jabatan</th>
+                                    <th>TMT</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -37,9 +39,7 @@
                 </div>
             </div>
         </div>
-        
     </div>
-    <!-- end of main-content -->
 </div>
 
 @endsection
@@ -54,24 +54,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-
+    
     <script>
+       
         $(document).ready(function () {
+            const pertiId = '{{$pertiId}}';
             const table = $('#main_table').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     {
                         text:'+ Add New',
                         attr:{
-                            id:'add-new-bp',
+                            id:'add-new-pimpinan_perti',
                             class:'btn btn-primary',
                         }
                     }
                 ],
                 processing:true,
                 serverSide: true,
-                ajax: '/perguruan-tinggi/perguruantinggijson',
-                columns: [
+                ajax: '/pimpinan-perti/pimpinanpertibyidpertijson/' + pertiId,
+                columns:[
                     { data: 'id', name: 'id', visible: false },
                     {
                         data: null,
@@ -82,28 +84,18 @@
                             return meta.row + 1;
                         }
                     },
-                    { data: 'perti_kode', name: 'perti_kode'},
-                    { data: 'perti_nama', name: 'perti_nama'},
-                    { data: 'perti_kota', name: 'perti_kota'},
-                    { data: 'perti_status', name: 'perti_status'},
-                    {
-                        data: 'test', 
-                        name: 'test',
-                        searchable:'false',
-                        orderable: false,
-                        render: function(data, type, full, meta) {
-                            return '<p>no data</p>';
-                        }
-                    },
-                    { data: 'keterangan', name: 'keterangan'},
+                    { data: 'name', name: 'name' },
+                    { data: 'jabatan_nama', name: 'jabatan_nama' },
+                    { data: 'pimpinan_tgl_awal', name: 'pimpinan_tgl_awal' },
+
+                    
                     { 
                         data: 'action', 
                         name: 'Action',
                         searchable:'false',
                         orderable: false,
                         render: function(data, type, row, meta) {
-                            var detailUrl = "{{ route('perguruan-tinggi.show', ':id') }}".replace(':id', row.id);
-                            var editUrl = "{{ route('perguruan-tinggi.edit',   ':id') }}".replace(':id', row.id);
+                            var editUrl = "{{ route('pimpinan-perti.edit', ':id') }}".replace(':id', row.id);
     
                             return `
                                 <div class="btn-group dropleft">
@@ -113,7 +105,6 @@
                                         <span class="_dot _r_block-dot bg-success"></span>
                                     </button>
                                     <div class="dropdown-menu" x-placement="bottom-start">
-                                        <a class="dropdown-item" href="${detailUrl}">Detail</a>
                                         <a class="dropdown-item" href="${editUrl}">Edit</a>
                                     </div>
                                 </div>
@@ -121,21 +112,16 @@
                         }
                     },
 
-
-                    
                 ],
-                order: [[0, 'asc']] // Order by the forst column ('id') in ascending order
-            })
-        })
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#add-new-bp').click(function() {
-                window.location.href = '{{ route("perguruan-tinggi.create") }}';            
             });
         });
     </script>
-
-
+    <script>
+        $(document).ready(function() {
+            $('#add-new-pimpinan_perti').click(function() {
+                window.location.href = '{{ route("pimpinan-perti.create") }}';            
+            });
+        });
+    </script>
+    
 @endsection

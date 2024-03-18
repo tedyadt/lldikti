@@ -19,6 +19,7 @@ class PerguruanTinggi extends Model
 
 
     protected $fillable = [
+        'id',
         'perti_nama',
         'perti_nama_singkat',
         'perti_sk_pendirian',
@@ -30,9 +31,13 @@ class PerguruanTinggi extends Model
         'perti_telp',
         'perti_status',
         'keterangan',
-        'id_bp',
+        'fk_bp_guid',
+        'fk_lembaga_id',
         'perti_logo',
         'perti_guid',
-        'perti_kode'
+        'perti_kode',
+        'id_user',
+        'perti_website'
+        
     ];
 }

@@ -6,6 +6,10 @@ use App\Models\PimpinanPerti;
 use App\Http\Requests\StorePimpinanPertiRequest;
 use App\Http\Requests\UpdatePimpinanPertiRequest;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Jabatan;
+
+
 
 class PimpinanPertiController extends Controller
 {
@@ -14,7 +18,8 @@ class PimpinanPertiController extends Controller
      */
     public function index()
     {
-        //
+        abort_if(Gate::denies('access_pimpinan_perguruan_tinggi'), 403);
+        return view('perguruan_tinggi.pimpinan_perti.index');
     }
 
     /**
@@ -22,7 +27,13 @@ class PimpinanPertiController extends Controller
      */
     public function create()
     {
-        //
+        abort_if(Gate::denies('input_pimpinan_perguruan_tinggi'), 403);
+        $jabatan_s = Jabatan::select([
+            'id', 'jabatan_nama'
+        ])->get();
+        return view('perguruan_tinggi.pimpinan_perti.create',    [
+            'jabatan_s' => $jabatan_s
+        ]);
     }
 
     /**
@@ -30,12 +41,50 @@ class PimpinanPertiController extends Controller
      */
     public function store(StorePimpinanPertiRequest $request)
     {
-        //
-    }
+        
+            abort_if(Gate::denies('create_data_pimpinan_perguruan_tinggi'), 403);
+            try{
+                $validatedDataAgreement = $request->validate([
+                    'agreement' => 'required',
+                    'id_user' => 'required|exists:users,id'
+                ]);
+                $id_user = $validatedDataAgreement['id_user'];
+    
+                $validatedDataPimpinanPerti = $request->validate([
 
-    /**
-     * Display the specified resource.
-     */
+                    'pimpinan_nama' => 'required|string',
+                    'jabatan_nama' => 'required|string',
+                    'pimpinan_tgl_awal' => 'required|date',
+                    
+                ]);  
+                $pimpinanPertiGuid = Uuid::uuid4()->toString();
+                $validatedDataPimpinanPerti['id'] = $pimpinanPertiGuid; 
+                $validatedDataPimpinanPerti['id_user'] = $id_user;
+    
+    
+                DB::beginTransaction();
+                try{
+    
+                    Jabatan::create($validatedDataJabatan);
+                    PimpinanPerti::create($validatedDataPimpinanPerti);
+                    
+    
+                    DB::commit();
+                    
+                    dd('sukses');
+    
+                }catch(\Exception $e){
+                    DB::rollback();
+    
+                    dd('terjadi kesalahan saat store ke db '. $e->getMessage());
+                }
+    
+            }catch(\Exception $e){
+                dd( $e->getMessage() );
+            }
+        }
+
+   
     public function show(PimpinanPerti $pimpinanPerti)
     {
         //
@@ -46,7 +95,8 @@ class PimpinanPertiController extends Controller
      */
     public function edit(PimpinanPerti $pimpinanPerti)
     {
-        //
+        abort_if(Gate::denies('edit_pimpinan_perguruan_tinggi'), 403);
+        return view('pimpinan_perti.edit');
     }
 
     /**
@@ -54,7 +104,8 @@ class PimpinanPertiController extends Controller
      */
     public function update(UpdatePimpinanPertiRequest $request, PimpinanPerti $pimpinanPerti)
     {
-        //
+        abort_if(Gate::denies('edit_pimpinan_perguruan_tinggi'), 403);
+        
     }
 
     /**
@@ -63,5 +114,19 @@ class PimpinanPertiController extends Controller
     public function destroy(PimpinanPerti $pimpinanPerti)
     {
         //
+    }
+
+    public function pimpinanpertibyidpertijson($id_perti){
+        $pimpinanPerti = PimpinanPerti::select([
+            'pimpinan_pertis.id',
+            'pimpinan_pertis.pimpinan_nama',
+            'pimpinan_pertis.pimpinan_tgl_awal',
+            'jabatans.jabatan_nama',
+            
+        ])->join('jabatans' , 'pimpinan_pertis.fk_jabatan_guid' , '=' , 'jabatans.id')
+        ->where('pimpinan_pertis.fk_perti_guid' , '=' , $id_perti)
+        ->get();
+    
+        return Datatables::of($pimpinanPerti)->make(true);
     }
 }

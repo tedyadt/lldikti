@@ -12,6 +12,7 @@ use App\Models\PeringkatAkreditasi;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StorePerguruanTinggiRequest;
 use App\Http\Requests\UpdatePerguruanTinggiRequest;
+use Ramsey\Uuid\Uuid;
 
 class PerguruanTinggiController extends Controller
 {
@@ -55,8 +56,14 @@ class PerguruanTinggiController extends Controller
     {
         abort_if(Gate::denies('create_data_perguruan_tinggi'), 403);
         try{
-            // dd($request);
+            $validatedDataAgreement = $request->validate([
+                'agreement' => 'required',
+                'id_user' => 'required|exists:users,id'
+            ]);
+            $id_user = $validatedDataAgreement['id_user'];
+
             $validatedDataPerti = $request->validate([
+                'perti_kode' => 'required|numeric|unique:perguruan_tinggis,perti_kode',
                 'perti_nama' => 'required|string',
                 'perti_nama_singkat' => 'required|string',
                 'perti_sk_pendirian' => 'required|string',
@@ -68,18 +75,31 @@ class PerguruanTinggiController extends Controller
                 'perti_website' => 'required|string',
                 'perti_status' =>'required|string|in:Aktif,Pembinaan,Alih Bentuk,Alih Kelola,Tutup',
                 'keterangan' =>'required|string',
-                'id_bp' =>'required|string|exists:badan_penyelenggaras,id',
+                'fk_bp_guid' =>'required|string|exists:badan_penyelenggaras,id',
                 'perti_logo' => 'required|image|mimes:jpeg,png,jpg|max:2048'
             ]);  
+            $pertiGuid = Uuid::uuid4()->toString();
+            $validatedDataPerti['id'] = $pertiGuid; 
+            $validatedDataPerti['id_user'] = $id_user;
+
 
             $validatedDataAkreditasi = $request->validate([
                 'akeditasi_pt_sk' => 'required|string',
                 'akreditasi_pt_tgl_sk' => 'string|date',
                 'akreditasi_pt_tgl_akhir' => 'string|date',
                 'akreditasi_pt_status' => 'string|required|in:Aktif,Berakhir',
-                'id_lembaga' => 'required|string|exists:lembagas,id',
-                'id_peringkat_akreditasi' => 'required|string|exists:peringkat_akreditasis,id'
+                'fk_lembaga_id' => 'required|string|exists:lembagas,id',
+                'fk_peringkat_id' => 'required|string|exists:peringkat_akreditasis,id'
             ]);
+            $akreditasiPertiGuid = Uuid::uuid4()->toString();
+            $validatedDataAkreditasi['id'] = $akreditasiPertiGuid; 
+            $validatedDataAkreditasi['fk_perti_guid'] = $pertiGuid; 
+            $validatedDataAkreditasi['id_user'] = $id_user;
+
+
+            // dd($validatedDataAkreditasiPerti);
+            
+
             // dd($validatedDataAkreditasi);
             if ($request->hasFile('perti_logo')) {
                 $filenameWithExt = $request->file('perti_logo')->getClientOriginalName(); $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -151,6 +171,7 @@ class PerguruanTinggiController extends Controller
     public function perguruantinggijson(){
         $perguruanTinggi = PerguruanTinggi::select([
             'id',
+            'perti_kode',
             'perti_nama',
             'perti_status',
             'perti_kota',
