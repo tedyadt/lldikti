@@ -6,6 +6,7 @@ use App\Models\PeringkatAkreditasi;
 use App\Http\Requests\StorePeringkatAkreditasiRequest;
 use App\Http\Requests\UpdatePeringkatAkreditasiRequest;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Gate;
 
 class PeringkatAkreditasiController extends Controller
 {
@@ -56,7 +57,10 @@ class PeringkatAkreditasiController extends Controller
      */
     public function show(PeringkatAkreditasi $peringkatAkreditasi)
     {
-        //
+        abort_if(Gate::denies('show_data_peringkat_akreditasi'), 403);
+        return view('master.peringkat_akreditasi.detail',[
+            'peringkat' => $peringkatAkreditasi
+        ]);
     }
 
     /**

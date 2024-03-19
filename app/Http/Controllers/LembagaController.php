@@ -6,6 +6,7 @@ use App\Models\Lembaga;
 use App\Http\Requests\StoreLembagaRequest;
 use App\Http\Requests\UpdateLembagaRequest;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Gate;
 
 class LembagaController extends Controller
 {
@@ -53,7 +54,10 @@ class LembagaController extends Controller
      */
     public function show(Lembaga $lembaga)
     {
-        //
+        abort_if(Gate::denies('show_data_lembaga_akreditasi'), 403);
+        return view('master.lembaga_akreditasi.detail',[
+            'lembaga' => $lembaga
+        ]);
     }
 
     /**

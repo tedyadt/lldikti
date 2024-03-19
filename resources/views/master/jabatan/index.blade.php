@@ -24,8 +24,7 @@
                                 <tr>
                                     <th>id</th>
                                     <th>No</th>
-                                    <th>Peringkat</th>
-                                    <th>Logo</th>
+                                    <th>Nama Jabatan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -51,21 +50,21 @@
 
 <script>
     $(document).ready(function () {
-        const assetUrl = "{{ asset('storage/peringkat_akreditasi') }}";
+        const assetUrl = "{{ asset('storage/lembaga_akreditasi') }}";
         const table = $('#main_table').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 {
                     text:'+ Add New',
                     attr:{
-                        id:'add-new-pa',
+                        id:'add-new-jb',
                         class:'btn btn-primary',
                     }
                 }
             ],
             processing:true,
             serverSide: true,
-            ajax: '/peringkat-akreditasi/peringkatakreditasijson',
+            ajax: '/lembaga-akreditasi/lembagaakreditasijson',
             columns: [
                 { data: 'id', name: 'id', visible: false },
                 {
@@ -77,10 +76,12 @@
                         return meta.row + 1;
                     }
                 },
-                { data: 'peringkat_nama', name: 'peringkat_nama'},
+                { data: 'lembaga_nama', name: 'lembaga_nama'},
+                { data: 'lembaga_nama_singkat', name: 'lembaga_nama_singkat'},
+                { data: 'lembaga_status', name: 'lembaga_status'},
                 {
-                data: 'peringkat_logo',
-                name: 'peringkat_logo',
+                data: 'lembaga_logo',
+                name: 'lembaga_logo',
                 render: function(data) {
                     return '<img src="' + assetUrl + '/' +data + '" width="50" height="50">';
                 }
@@ -91,7 +92,7 @@
                     searchable:'false',
                     orderable: false,
                     render: function(data, type, row, meta) {
-                        var detailUrl = "{{ route('peringkat-akreditasi.show', ':id') }}".replace(':id', row.id);
+                        var detailUrl = "{{ route('perguruan-tinggi.show', ':id') }}".replace(':id', row.id);
                         var editUrl = "{{ route('perguruan-tinggi.edit',   ':id') }}".replace(':id', row.id);
 
                         return `
@@ -120,8 +121,8 @@
 
 <script>
     $(document).ready(function() {
-        $('#add-new-pa').click(function() {
-            window.location.href = '{{ route("peringkat-akreditasi.create") }}';            
+        $('#add-new-la').click(function() {
+            window.location.href = '{{ route("lembaga-akreditasi.create") }}';            
         });
     });
 </script>

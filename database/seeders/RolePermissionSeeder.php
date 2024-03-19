@@ -70,6 +70,10 @@ class RolePermissionSeeder extends Seeder
 
             'view_restrict_pimpinan_perguruan_tinggi',
 
+            'show_data_peringkat_akreditasi',
+            
+            'show_data_lembaga_akreditasi',
+
         ];
 
         foreach ($permissions as $permission) {
