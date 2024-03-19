@@ -17,4 +17,9 @@ class Jabatan extends Model
         return 'string';
     }
 
+    protected $fillable = [
+        'id',
+        'jabatan_nama'
+    ];
+
 }
