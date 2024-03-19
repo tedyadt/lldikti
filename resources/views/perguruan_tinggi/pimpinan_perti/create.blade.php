@@ -29,8 +29,8 @@
                         {{-- your conten should be here --}}
                         <div class="row">
                             <div class="col-md-6 form-group mb-3">
-                                <label for="bp_nama">Nama<span style="color: red">*</span></label>
-                                <textarea class="form-control" id="bp_nama" rows="3" name="bp_nama"  required></textarea>
+                                <label for="pimpinan_nama">Nama<span style="color: red">*</span></label>
+                                <textarea class="form-control" id="pimpinan_nama" rows="3" name="pimpinan_nama"  required></textarea>
                             </div>
                             <div class="col-md-12 form-group mb-3">
                                 <label for="">Jabatan<span style="color: red">*</span></label>

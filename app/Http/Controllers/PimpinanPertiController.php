@@ -8,7 +8,8 @@ use App\Http\Requests\UpdatePimpinanPertiRequest;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Jabatan;
-
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\DB;
 
 
 class PimpinanPertiController extends Controller
@@ -42,7 +43,7 @@ class PimpinanPertiController extends Controller
     public function store(StorePimpinanPertiRequest $request)
     {
         
-            abort_if(Gate::denies('create_data_pimpinan_perguruan_tinggi'), 403);
+            abort_if(Gate::denies('input_pimpinan_perguruan_tinggi'), 403);
             try{
                 $validatedDataAgreement = $request->validate([
                     'agreement' => 'required',
@@ -53,13 +54,22 @@ class PimpinanPertiController extends Controller
                 $validatedDataPimpinanPerti = $request->validate([
 
                     'pimpinan_nama' => 'required|string',
-                    'jabatan_nama' => 'required|string',
                     'pimpinan_tgl_awal' => 'required|date',
                     
                 ]);  
+
+                $validatedDataJabatan = $request->validate([
+                   
+                    'jabatan_nama' => 'required|string',
+                
+                ]);  
+
                 $pimpinanPertiGuid = Uuid::uuid4()->toString();
+                $jabatanGuid = Uuid::uuid4()->toString();
                 $validatedDataPimpinanPerti['id'] = $pimpinanPertiGuid; 
+                $validatedDataJaba['id'] = $jabatanGuid; 
                 $validatedDataPimpinanPerti['id_user'] = $id_user;
+                $validatedDataJabatan['id_user'] = $id_user;
     
     
                 DB::beginTransaction();

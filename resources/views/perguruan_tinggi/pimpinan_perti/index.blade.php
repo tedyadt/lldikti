@@ -119,9 +119,9 @@ $pertiId = $_GET['id_perti'];
     <script>
         $(document).ready(function() {
             $('#add-new-pimpinan_perti').click(function() {
-                window.location.href = '{{ route("pimpinan-perti.create") }}';            
+                window.location.href = '{{ route("pimpinan-perti.create" , ['id_perti' => $pertiId]) }}';            
             });
         });
     </script>
-    
+        
 @endsection

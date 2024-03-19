@@ -17,4 +17,11 @@ class PimpinanPerti extends Model
         return 'string';
     }
 
+    protected $fillable = [
+        'id',
+        'pimpinan_nama',
+        'fk_perti_guid',
+        
+    ];
+
 }
