@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth']], function() {
     require __DIR__.'/partial/role.php';
     require __DIR__.'/partial/user.php';
     require __DIR__.'/partial/pimpinan_perti.php';
+    require __DIR__.'/partial/jabatan.php';
+
 
 
 

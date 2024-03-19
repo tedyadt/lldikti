@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Jabatan;
 use App\Http\Requests\StoreJabatanRequest;
 use App\Http\Requests\UpdateJabatanRequest;
+use Illuminate\Support\Facades\Gate;
+use Yajra\Datatables\Datatables;
+use Ramsey\Uuid\Uuid;
 
 class JabatanController extends Controller
 {
@@ -13,7 +16,8 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        //
+        abort_if(Gate::denies('access_data_jabatan'), 403);
+        return view('master.jabatan.index');
     }
 
     /**
@@ -21,7 +25,8 @@ class JabatanController extends Controller
      */
     public function create()
     {
-        //
+        abort_if(Gate::denies('input_data_jabatan'), 403);
+        return view('master.jabatan.create');
     }
 
     /**
@@ -29,7 +34,24 @@ class JabatanController extends Controller
      */
     public function store(StoreJabatanRequest $request)
     {
-        //
+        abort_if(Gate::denies('input_data_jabatan'), 403);
+        try {
+            
+            $validatedDataJabatan = $request->validate([
+                'jabatan_nama' => 'required|string',
+                
+            ]);
+
+            $jabatanGuid = Uuid::uuid4()->toString();
+            $validatedDataJabatan['id'] = $jabatanGuid; 
+            
+            
+            Jabatan::create($validatedDataJabatan);
+            dd('Success');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
     }
 
     /**
@@ -62,5 +84,14 @@ class JabatanController extends Controller
     public function destroy(Jabatan $jabatan)
     {
         //
+    }
+
+    public function jabatanjson(){
+        $jabatan = Jabatan::select([
+            'id',
+            'jabatan_nama'
+        ]);
+
+        return Datatables::of($jabatan)->make(true);
     }
 }

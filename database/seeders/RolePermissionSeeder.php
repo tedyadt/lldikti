@@ -74,6 +74,21 @@ class RolePermissionSeeder extends Seeder
             
             'show_data_lembaga_akreditasi',
 
+            //jabatan
+
+            'access_data_jabatan',
+
+            'input_data_jabatan',
+
+            'edit_data_jabatan',
+
+            'view_all_data_jabatan',
+
+            'view_restrict_data_jabatan',
+
+            'show_data_jabatan'
+            
+           
         ];
 
         foreach ($permissions as $permission) {

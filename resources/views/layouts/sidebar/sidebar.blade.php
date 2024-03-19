@@ -29,6 +29,12 @@
                                     <span class="item-name">Lembaga Akreditesi</span>
                                 </a>
                             </li>
+                            <li class="item-name">
+                                <a href="{{ route('jabatan') }}">
+                                    <i class="nav-icon i-Receipt-4"></i>
+                                    <span class="item-name">Jabatan</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
