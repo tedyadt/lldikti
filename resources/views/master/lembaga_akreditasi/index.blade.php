@@ -95,7 +95,7 @@
                     searchable:'false',
                     orderable: false,
                     render: function(data, type, row, meta) {
-                        var detailUrl = "{{ route('perguruan-tinggi.show', ':id') }}".replace(':id', row.id);
+                        var detailUrl = "{{ route('lembaga-akreditasi.show', ':id') }}".replace(':id', row.id);
                         var editUrl = "{{ route('perguruan-tinggi.edit',   ':id') }}".replace(':id', row.id);
 
                         return `

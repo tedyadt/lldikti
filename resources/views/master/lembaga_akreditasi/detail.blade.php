@@ -22,10 +22,10 @@
                         <h4>Lembaga Akreditasi</h4>
                         <div class="row">
                             <div class="col-md-4 d-flex justify-content-center align-items-center">
-                                <img class="img-fluid rounded mb-2" src="{{ asset('storage/lembaga_akreditasi/'.$peringkat->peringkat_logo) }}" alt="" />
+                                <img class="img-fluid rounded mb-2" src="{{ asset('storage/lembaga_akreditasi/'.$lembaga->lembaga_logo) }}" alt="" />
                             </div>
                             <div class="col-md-4 d-flex justify-content-center align-items-center">
-                                <h2 class="font-weight-bold text-center">{{ $peringkat->peringkat_nama }}</h2>
+                                <h2 class="font-weight-bold text-center">{{ $lembaga->lembaga_nama }}</h2>
                             </div>   
                             <div class="col-md-4 d-flex justify-content-center align-items-center">
                                 <img class="img-fluid rounded mb-2" src="{{ asset('storage/akreditasi/akreditasi-a.jpg') }}" alt="" />
@@ -44,14 +44,24 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tr>
-                                            <th scope="col">Peringkat Nama</th>
+                                            <th scope="col">Nama Lembaga</th>
                                             <th>:</th>
-                                            <td>{{ $peringkat->peringkat_nama }}</td>
+                                            <td>{{ $lembaga->lembaga_nama }}</td>
                                         </tr>
                                         <tr>
-                                            <th scope="col">Peringkat Logo</th>
+                                            <th scope="col">Nama Singkat Lembaga</th>
                                             <th>:</th>
-                                            <td>{{ $peringkat->peringkat_logo }}</td>
+                                            <td>{{ $lembaga->lembaga_nama_singkat }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Logo Lembaga</th>
+                                            <th>:</th>
+                                            <td>{{ $lembaga->lembaga_logo }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Status Lembaga</th>
+                                            <th>:</th>
+                                            <td>{{ $lembaga->lembaga_status }}</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -88,7 +98,7 @@
                     {
                         text:'+ Add New',
                         attr:{
-                            id:'add-new-bp',
+                            id:'add-new-lm',
                             class:'btn btn-primary',
                         }
                     }

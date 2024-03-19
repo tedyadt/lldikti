@@ -55,6 +55,7 @@ class LembagaController extends Controller
     public function show(Lembaga $lembaga)
     {
         abort_if(Gate::denies('show_data_lembaga_akreditasi'), 403);
+        // dd($lembaga);
         return view('master.lembaga_akreditasi.detail',[
             'lembaga' => $lembaga
         ]);
