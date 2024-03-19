@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\PimpinanPerti;
+use App\Models\PerguruanTinggi;
+use App\Models\Jabatan;
 use App\Http\Requests\StorePimpinanPertiRequest;
 use App\Http\Requests\UpdatePimpinanPertiRequest;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Gate;
-use App\Models\Jabatan;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\DB;
 
@@ -56,6 +57,7 @@ class PimpinanPertiController extends Controller
                     'pimpinan_nama' => 'required|string',
                     'pimpinan_tgl_awal' => 'required|date',
                     
+                    
                 ]);  
 
                 $validatedDataJabatan = $request->validate([
@@ -64,18 +66,26 @@ class PimpinanPertiController extends Controller
                 
                 ]);  
 
+                $validatedDataPerti = $request->validate([
+                   
+                    'id_perti' => 'required|exists:perguruan_tinggis, id'
+                ]);  
+
                 $pimpinanPertiGuid = Uuid::uuid4()->toString();
                 $jabatanGuid = Uuid::uuid4()->toString();
+                $pertiGuid = Uuid::uuid4()->toString();
                 $validatedDataPimpinanPerti['id'] = $pimpinanPertiGuid; 
-                $validatedDataJaba['id'] = $jabatanGuid; 
+                $validatedDataJabatan['id'] = $jabatanGuid;
+                $validatedDataPerti['id'] = $pertiGuid;  
                 $validatedDataPimpinanPerti['id_user'] = $id_user;
+                $validatedDataPerti['id_user'] = $id_user;
                 $validatedDataJabatan['id_user'] = $id_user;
     
     
                 DB::beginTransaction();
                 try{
     
-                    Jabatan::create($validatedDataJabatan);
+                    
                     PimpinanPerti::create($validatedDataPimpinanPerti);
                     
     
@@ -134,7 +144,7 @@ class PimpinanPertiController extends Controller
             'jabatans.jabatan_nama',
             
         ])->join('jabatans' , 'pimpinan_pertis.fk_jabatan_guid' , '=' , 'jabatans.id')
-        ->where('pimpinan_pertis.fk_perti_guid' , '=' , $id_perti)
+        ->where('pimpinan_pertis.fk_perti_guid  ' , '=' , $id_perti)
         ->get();
     
         return Datatables::of($pimpinanPerti)->make(true);

@@ -20,7 +20,7 @@ class PimpinanPerti extends Model
     protected $fillable = [
         'id',
         'pimpinan_nama',
-        'fk_perti_guid',
+        'fk_jabatan_guid'
         
     ];
 

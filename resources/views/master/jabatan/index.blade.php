@@ -50,21 +50,21 @@
 
 <script>
     $(document).ready(function () {
-        const assetUrl = "{{ asset('storage/lembaga_akreditasi') }}";
+        const assetUrl = "{{ asset('storage/jabatan') }}";
         const table = $('#main_table').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 {
                     text:'+ Add New',
                     attr:{
-                        id:'add-new-jb',
+                        id:'add-new-la',
                         class:'btn btn-primary',
                     }
                 }
             ],
             processing:true,
             serverSide: true,
-            ajax: '/lembaga-akreditasi/lembagaakreditasijson',
+            ajax: '/jabatan/jabatanjson',
             columns: [
                 { data: 'id', name: 'id', visible: false },
                 {
@@ -76,23 +76,15 @@
                         return meta.row + 1;
                     }
                 },
-                { data: 'lembaga_nama', name: 'lembaga_nama'},
-                { data: 'lembaga_nama_singkat', name: 'lembaga_nama_singkat'},
-                { data: 'lembaga_status', name: 'lembaga_status'},
-                {
-                data: 'lembaga_logo',
-                name: 'lembaga_logo',
-                render: function(data) {
-                    return '<img src="' + assetUrl + '/' +data + '" width="50" height="50">';
-                }
-            },
+                { data: 'jabatan_nama', name: 'jabatan_nama'},
+                
+                
                 { 
                     data: 'action', 
                     name: 'Action',
                     searchable:'false',
                     orderable: false,
                     render: function(data, type, row, meta) {
-                        var detailUrl = "{{ route('perguruan-tinggi.show', ':id') }}".replace(':id', row.id);
                         var editUrl = "{{ route('perguruan-tinggi.edit',   ':id') }}".replace(':id', row.id);
 
                         return `
@@ -103,7 +95,7 @@
                                     <span class="_dot _r_block-dot bg-success"></span>
                                 </button>
                                 <div class="dropdown-menu" x-placement="bottom-start">
-                                    <a class="dropdown-item" href="${detailUrl}">Detail</a>
+                                  
                                     <a class="dropdown-item" href="${editUrl}">Edit</a>
                                 </div>
                             </div>
@@ -122,7 +114,7 @@
 <script>
     $(document).ready(function() {
         $('#add-new-la').click(function() {
-            window.location.href = '{{ route("lembaga-akreditasi.create") }}';            
+            window.location.href = '{{ route("jabatan.create") }}';            
         });
     });
 </script>

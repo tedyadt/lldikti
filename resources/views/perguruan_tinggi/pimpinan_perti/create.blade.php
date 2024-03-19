@@ -10,6 +10,9 @@
 @endsection
 
 @section('main-content')
+@php 
+$pertiId = $_GET['id_perti'];
+@endphp
 <div class="main-content pt-4">
     <div class="breadcrumb">
         {{-- <h1 class="mr-2">{{ $page_title }}</h1> --}}
@@ -40,6 +43,8 @@
                                     <option value="{{ $item->id }}">{{ $item->jabatan_nama }}</option>    
                                     @endforeach
                                 </select> 
+                            </div>
+                            <div><input type="text" value = "{{$pertiId}}" name ="id_perti" required />
                             </div>
                             <div class="col-md-6 form-group mb-3">
                                 <label for="pimpinan_tgl_awal">TMT<span style="color: red">*</span></label>
