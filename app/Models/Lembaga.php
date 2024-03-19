@@ -9,7 +9,7 @@ class Lembaga extends Model
 {
     use HasFactory;
 
-
+    protected $primaryKey = 'id';
     protected $fillable = [
         'lembaga_nama',
         'lembaga_nama_singkat',
